@@ -1,0 +1,25 @@
+\BOOKMARK [1][-]{section.1}{Conceptual Breakdown}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Initialize the network parameters.}{section.1}% 2
+\BOOKMARK [3][-]{subsubsection.1.1.1}{Fixed Parameters}{subsection.1.1}% 3
+\BOOKMARK [3][-]{subsubsection.1.1.2}{Learnable Parameters}{subsection.1.1}% 4
+\BOOKMARK [2][-]{subsection.1.2}{Perform a feed-forward pass to compute the predicted output.}{section.1}% 5
+\BOOKMARK [3][-]{subsubsection.1.2.1}{Multiply the layer inputs by their corresponding weights and add the bias offset.}{subsection.1.2}% 6
+\BOOKMARK [3][-]{subsubsection.1.2.2}{2.2 Apply an activation function.}{subsection.1.2}% 7
+\BOOKMARK [2][-]{subsection.1.3}{Compute the loss.}{section.1}% 8
+\BOOKMARK [2][-]{subsection.1.4}{Update parameters using gradient descent and backpropagation.}{section.1}% 9
+\BOOKMARK [3][-]{subsubsection.1.4.1}{Calculating loss function gradient w.r.t. the parameters using backpropagation.}{subsection.1.4}% 10
+\BOOKMARK [3][-]{subsubsection.1.4.2}{Minimizing loss and updating parameters using gradient descent.}{subsection.1.4}% 11
+\BOOKMARK [1][-]{section.2}{Coding the Neural Network}{}% 12
+\BOOKMARK [2][-]{subsection.2.1}{Neural Network Class}{section.2}% 13
+\BOOKMARK [2][-]{subsection.2.2}{Activation Functions and their Derivatives}{section.2}% 14
+\BOOKMARK [2][-]{subsection.2.3}{Loss Functions}{section.2}% 15
+\BOOKMARK [2][-]{subsection.2.4}{Neural Network Test: Fake Data}{section.2}% 16
+\BOOKMARK [3][-]{subsubsection.2.4.1}{Create the Fake Data}{subsection.2.4}% 17
+\BOOKMARK [3][-]{subsubsection.2.4.2}{Run the Neural Network}{subsection.2.4}% 18
+\BOOKMARK [2][-]{subsection.2.5}{Neural Network Test: Public Dataset}{section.2}% 19
+\BOOKMARK [3][-]{subsubsection.2.5.1}{Import Boston Housing Prices Dataset}{subsection.2.5}% 20
+\BOOKMARK [3][-]{subsubsection.2.5.2}{Transform and Preprocess Data}{subsection.2.5}% 21
+\BOOKMARK [3][-]{subsubsection.2.5.3}{Run the Neural Network}{subsection.2.5}% 22
+\BOOKMARK [1][-]{section.3}{Summary}{}% 23
+\BOOKMARK [1][-]{section.4}{References}{}% 24
+\BOOKMARK [1][-]{section.5}{Appendix}{}% 25

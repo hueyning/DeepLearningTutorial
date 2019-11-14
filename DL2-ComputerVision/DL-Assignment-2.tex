@@ -1,0 +1,1425 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Deep Learning Assignment 2: Convolutional Neural Networks}
+    \author{Huey Ning Lok}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Description:}\label{description}
+
+In this assignment, we will implement a convolutional neural network in
+PyTorch. At a minimum, it should be solving a binary classification
+problem using a novel dataset. You should experiment with different
+architectures, activation functions, regularization techniques,
+optimizers, etc. and thoroughly explain which techniques you tried,
+which worked better, and why you made this specific architecture
+decision.
+
+\subsection{Requirements:}\label{requirements}
+
+Implement a working convolutional neural network using the architecture
+of your choice. The architecture of your network should be thoroughly
+commented. Avoid using standard datasets such as MNIST or CIFAR10. The
+more creative you get the better! At a minimum, you should tackle binary
+classification problem. As an extension, you can try working on more
+complicated datasets, multiclass problems, etc.
+
+Please document your code and write a brief summary which includes any
+interesting technical details and your results.
+
+\subsection{Extensions:}\label{extensions}
+
+Implement one or more of the following, and include a comparison of the
+model's runtime and performance with/without each component:
+
+\begin{itemize}
+\tightlist
+\item
+  More than one architecture type: either experiment with different
+  layers or implement a different architecture from the literature
+\item
+  You can decide to tackle a more complicated problem such as object
+  detection, segmentation, etc. In this case, you should justify the
+  usage of a specific architecture.
+\item
+  Train the network on more than 1 dataset.
+\item
+  Compare your model to a pre-trained network.
+\end{itemize}
+
+\newpage
+    \section{Assignment Structure}\label{assignment-structure}
+
+For this assignment, I have decided to build and train a Convolutional
+Neural Network (CNN) model to solve a multilabel classification problem.
+I trained my custom model on the CIFAR dataset to ensure that it has a
+reasonable performance on a "classic" existing dataset before attempting
+to train my model on a novel, self-collected dataset. The custom model's
+performance on both the CIFAR and novel dataset are compared.
+
+    \section{Building the Custom Model}\label{building-the-custom-model}
+
+In the PyTorch tutorial on training a classifier (2017), they used a
+basic CNN model as follows:\\
+
+\texttt{Input\ -\textgreater{}\ Conv\ -\textgreater{}\ Pool\ -\textgreater{}\ Conv\ -\textgreater{}\ Pool\ -\textgreater{}\ Linear\ -\textgreater{}\ Linear\ -\textgreater{}\ Linear\ (output)}\\
+
+The convolutional and linear layers were activated using the ReLU
+function.\\
+
+Using this model as a base, I tweaked the architecture by heavily
+referencing Stanford's CS231n CNN course notes on how to design a CNN
+(Karpathy \& Johnson, 2017). There were some design choices that, while
+recognized as having high potential to improve model performance, were
+omitted from the network due to time and resource constraints.
+
+\subsection{Layers and Operations}\label{layers-and-operations}
+
+\paragraph{Convolutional Layer}\label{convolutional-layer}
+
+The convolutional layer is the main building block of the CNN. The
+convolutional layer performs a "convolution" by sliding a filter/kernel
+of randomly initialized weights over each pixel in the input image and
+taking the dot product of the filter weights and image pixel value at
+any given position. Once the filter has "convolved" the entire input,
+the result will be a 2D activation map of the filter responses at every
+spatial position. These activations can look totally incomprehensible in
+the first few iterations of training the network, when all the filter
+weights are completely random, but after awhile we expect to see some
+intuitive image features, e.g. edges, curves, being learned by the
+network through backpropagation and parameter updates (weights, biases).\\
+
+Karpathy and Johnson (2017) advocated for \textbf{"a stack of small
+filter CONV to one large receptive field CONV layer"} on the basis that
+the combination of non-linear activations at each stack allowed the CNN
+to learn more expressive features, and that a stack of small-filter
+convolutional layers could achieve the same dimensional view of the
+input as a single large-filter convolutional layer while having less
+learnable parameters.
+
+\paragraph{Pooling Layer}\label{pooling-layer}
+
+The purpose of pooling layers are to "progressively reduce the spatial
+size of the representation to reduce the amount of parameters and
+computation in the network, and hence to also control overfitting"
+(Kaparthy \& Johnson, 2017). Max pooling is most commonly used - a small
+window (typically with receptive field of 2x2 and stride of 2) slides
+across the input and takes the max number from each window, while
+discarding the rest. Since the window can be veiwed as a box with 4
+numbers, this leads to about 75\% of the input being discarded.\\
+
+A pooling layer with receptive field, \(F = 2\) and stride, \(S=2\) that
+accepts an input with dimensions of:\\
+
+\(W \times H \times D\)\\
+
+will produce an output with dimensions:\\
+
+\(\bigg(\frac{(W-F)}{S} + 1\bigg) \times \bigg(\frac{(H-F)}{S} + 1\bigg) \times D\)\\
+
+So, if the input is \((32,32,3)\), the output after max-pooling will be
+\((16,16,3)\).\\
+
+Pooling layers helps to prevent overfit and reduces the amount of
+learnable parameters, but they can also be destructive since they
+discard away 75\% of the input information.
+
+\paragraph{Batch Normalization}\label{batch-normalization}
+
+Batch normalization (BN) is a technique to normalize activations in
+intermediate layers of deep neural networks, it is normally performed
+over mini-batches and not the entire neural network due to speed reasons
+(Bjorck, Gomes, Selman \& Weinberger, 2018).\\
+
+At a high level, BN works by subtracting the mean activation from all
+input activations in a channel, then divides the centered activation by
+the standard deviation of the channel; this is followed by a
+channel-wise affine transformation parametrized by slope and intercept
+parameters which are learned during training (Bjorck et al., 2018).\\
+
+BN has been hypothesized to reduce ``internal covariate shift'' -- the
+tendency of the distribution of activations to drift during training,
+thus affecting the inputs to subsequent layers (Ioffe \& Szegedy, 2015
+as cited in Bjorck et al., 2018). While this hypothesis has not been
+proven to be infallibly true, empirical results have shown that networks
+with BN tends to result in higher accuracy vs non-BN networks (Bjorck et
+al., 2018).
+
+\paragraph{Dropout}\label{dropout}
+
+Dropout is another technique to prevent overfitting. The idea behind it
+is to "randomly drop units (along with their connections) from the
+neural network during training. This prevents units from co-adapting too
+much" (Srivastava, Hinton, Krizhevsky, Sutskever \& Salakhutdinov,
+2014). As I was already implementing max-pooling to reduce overfit, and
+a recent study showed that the combination of both dropout and batch
+normalization within a neural network often leads to worse performance
+unless using a very wide neural net (Li, Chen, Hu \& Yang, 2019), I
+decided to omit a dropout operation from my neural network.
+
+\subsection{Activation Function}\label{activation-function}
+
+The Rectified Linear Unit (ReLU) has been shown to outperform the
+sigmoid activation function by greatly accelerating the convergence of
+stochastic gradient descent (probably due to its linear, non-saturating
+form, i.e. \(f(x)=\max(0,x)\)). However, ReLU units can also potentially
+"die" (remain at 0) when a very large gradient flows through the
+function and causes the weights to update in a way such that the neuron
+will never activate on any other datapoint it sees (Karpathy \& Johnson,
+2017).\\
+
+Leaky ReLU are an attempt to fix the "dying ReLU" problem by allowing a
+small, positive gradient when the unit is not active (Maas, Hannun \&
+Ng, 2013). That is:
+
+ \[ f(x) =
+\begin{cases} 
+          x & x > 0 \\
+          0.01x & \text{otherwise} 
+       \end{cases}
+    \]
+
+Leaky ReLU does not always improve performance (Karpathy \& Johnson,
+2017), but I decided to use it in my neural network anyway since it
+solved the dying ReLU problem.
+
+\subsection{Optimizers}\label{optimizers}
+
+I initially wanted to test out an Adam optimizer since it was newer than
+SGD and supposedly designed for deep neural network training in
+particular (Kingma \& Ba, 2014). However, after reading that it can
+often show worse results than a basic SGD optimizer over long training
+times (Bushaev, 2018), I decided to just use a SGD optimizer.
+
+\subsection{CNN Architectures}\label{cnn-architectures}
+
+Karpathy and Johnson (2017) provided the following common CNN
+architectures:\\
+
+\texttt{INPUT\ -\textgreater{}\ {[}CONV\ -\textgreater{}\ RELU\ -\textgreater{}\ POOL{]}*2\ -\textgreater{}\ FC\ -\textgreater{}\ RELU\ -\textgreater{}\ FC}\\
+
+This is similar to the PyTorch tutorial's architecture, i.e. each
+convolutional layer is followed by a pooling layer.\\
+
+\texttt{INPUT\ -\textgreater{}\ {[}CONV\ -\textgreater{}\ RELU\ -\textgreater{}\ CONV\ -\textgreater{}\ RELU\ -\textgreater{}\ POOL{]}*3\ -\textgreater{}\ {[}FC\ -\textgreater{}\ RELU{]}*2\ -\textgreater{}\ FC}\\
+
+In this architecture, there are two convolutional networks before the
+pooling operation is performed, so that the network can "develop more
+complex features of the input volume before the destructive pooling
+operation" (Kaparthy \& Johnson, 2017).
+
+\subsection{My CNN Architecture}\label{my-cnn-architecture}
+
+I decided to follow the conventional structure suggested by Karpathy and
+Johnson (2017) of using
+\texttt{CONV\ -\textgreater{}\ RELU\ -\textgreater{}\ POOL} layers, but
+substituted the ReLUs with Leaky ReLUs instead.\\
+
+Following the principle of using small kernel receptive fields, my
+convolutional layers had kernel sizes of 3 x 3. The kernels had a stride
+of 1 to reduce information loss, and no padding. While it was suggested
+to stack multiple convolutional layers, I only stacked two due to
+computational resources.\\
+
+I performed max-pool operations after each convolution as a way to
+prevent overfit and extract the "most important" features from the
+spatial input.\\
+
+I performed a 2D batch normalization after the second convolutional
+layer, and a 1D batch normalization after the first linear layer.\\
+
+The last 3 layers of my model are linear layers. This was mostly going
+off Kaparthy and Johnson's (2017) advice that it was common to
+transition towards fully-connected linear layers towards the end of the
+network, though I did not have a good intuition as to why this was so
+(except for the final output layer where the classification was
+performed).\\
+
+The CNN takes in an input of size 32 x 32 x 3, and outputs an activation
+energy for each of the classes found in the dataset. For CIFAR, this
+would be 10 classes. For my novel dataset, this would be 3 classes.\\
+
+The architecture of the model is shown below. A summary of the model
+with its outputs at every layer as well as number of parameters can be
+seen in the model training section.\\
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} import libraries}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} torch imports}
+        \PY{k+kn}{import} \PY{n+nn}{torch}
+        \PY{k+kn}{import} \PY{n+nn}{torchvision}
+        \PY{k+kn}{import} \PY{n+nn}{torchvision}\PY{n+nn}{.}\PY{n+nn}{transforms} \PY{k}{as} \PY{n+nn}{transforms}
+        \PY{k+kn}{import} \PY{n+nn}{torch}\PY{n+nn}{.}\PY{n+nn}{nn} \PY{k}{as} \PY{n+nn}{nn}
+        \PY{k+kn}{import} \PY{n+nn}{torch}\PY{n+nn}{.}\PY{n+nn}{nn}\PY{n+nn}{.}\PY{n+nn}{functional} \PY{k}{as} \PY{n+nn}{F}
+        \PY{k+kn}{import} \PY{n+nn}{torch}\PY{n+nn}{.}\PY{n+nn}{optim} \PY{k}{as} \PY{n+nn}{optim}
+        \PY{k+kn}{import} \PY{n+nn}{torchvision}\PY{n+nn}{.}\PY{n+nn}{datasets}
+        \PY{k+kn}{import} \PY{n+nn}{torchvision}\PY{n+nn}{.}\PY{n+nn}{utils} \PY{k}{as} \PY{n+nn}{vutils}
+        
+        \PY{c+c1}{\PYZsh{} Number of GPUs available. Use 0 for CPU mode.}
+        \PY{n}{ngpu} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{c+c1}{\PYZsh{} Decide which device we want to run on}
+        \PY{n}{device} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{device}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cuda:0}\PY{l+s+s2}{\PYZdq{}} \PY{k}{if} \PY{p}{(}\PY{n}{torch}\PY{o}{.}\PY{n}{cuda}\PY{o}{.}\PY{n}{is\PYZus{}available}\PY{p}{(}\PY{p}{)} \PY{o+ow}{and} \PY{n}{ngpu} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{)} \PY{k}{else} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cpu}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} build the model}
+        \PY{k}{class} \PY{n+nc}{Net}\PY{p}{(}\PY{n}{nn}\PY{o}{.}\PY{n}{Module}\PY{p}{)}\PY{p}{:}
+        
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{    Custom CNN Model.}
+        \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{out\PYZus{}features}\PY{p}{)}\PY{p}{:}
+        
+                \PY{n+nb}{super}\PY{p}{(}\PY{n}{Net}\PY{p}{,} \PY{n+nb+bp}{self}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{p}{)}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv1} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Conv2d}\PY{p}{(}\PY{n}{in\PYZus{}channels} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{,}
+                                       \PY{n}{out\PYZus{}channels} \PY{o}{=} \PY{l+m+mi}{6}\PY{p}{,}
+                                       \PY{n}{kernel\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{,}
+                                       \PY{n}{stride} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{pool} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{MaxPool2d}\PY{p}{(}\PY{n}{kernel\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{stride} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{)}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv2} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Conv2d}\PY{p}{(}\PY{n}{in\PYZus{}channels} \PY{o}{=} \PY{l+m+mi}{6}\PY{p}{,}
+                                       \PY{n}{out\PYZus{}channels} \PY{o}{=} \PY{l+m+mi}{16}\PY{p}{,}
+                                       \PY{n}{kernel\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{,}
+                                       \PY{n}{stride} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv2\PYZus{}bn} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{BatchNorm2d}\PY{p}{(}\PY{n}{num\PYZus{}features} \PY{o}{=} \PY{l+m+mi}{16}\PY{p}{)} \PY{c+c1}{\PYZsh{} batch norm for conv layer}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fc1} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Linear}\PY{p}{(}\PY{n}{in\PYZus{}features} \PY{o}{=} \PY{l+m+mi}{16} \PY{o}{*} \PY{l+m+mi}{6} \PY{o}{*} \PY{l+m+mi}{6}\PY{p}{,}
+                                     \PY{n}{out\PYZus{}features} \PY{o}{=} \PY{l+m+mi}{120}\PY{p}{)}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dense1\PYZus{}bn} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{BatchNorm1d}\PY{p}{(}\PY{n}{num\PYZus{}features} \PY{o}{=} \PY{l+m+mi}{120}\PY{p}{)} \PY{c+c1}{\PYZsh{} batch norm for linear layer}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fc2} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Linear}\PY{p}{(}\PY{n}{in\PYZus{}features} \PY{o}{=} \PY{l+m+mi}{120}\PY{p}{,}
+                                     \PY{n}{out\PYZus{}features} \PY{o}{=} \PY{l+m+mi}{84}\PY{p}{)}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fc3} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Linear}\PY{p}{(}\PY{n}{in\PYZus{}features} \PY{o}{=} \PY{l+m+mi}{84}\PY{p}{,}
+                                     \PY{n}{out\PYZus{}features} \PY{o}{=} \PY{n}{out\PYZus{}features}\PY{p}{)}
+        
+        
+            \PY{k}{def} \PY{n+nf}{forward}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{)}\PY{p}{:}
+        
+                \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{pool}\PY{p}{(}\PY{n}{F}\PY{o}{.}\PY{n}{leaky\PYZus{}relu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv1}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{pool}\PY{p}{(}\PY{n}{F}\PY{o}{.}\PY{n}{leaky\PYZus{}relu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv2\PYZus{}bn}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv2}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                \PY{n}{x} \PY{o}{=} \PY{n}{x}\PY{o}{.}\PY{n}{view}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{16} \PY{o}{*} \PY{l+m+mi}{6} \PY{o}{*} \PY{l+m+mi}{6}\PY{p}{)} \PY{c+c1}{\PYZsh{} before linear layer, flatten output to 16*6*6}
+                \PY{n}{x} \PY{o}{=} \PY{n}{F}\PY{o}{.}\PY{n}{leaky\PYZus{}relu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dense1\PYZus{}bn}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fc1}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                \PY{n}{x} \PY{o}{=} \PY{n}{F}\PY{o}{.}\PY{n}{leaky\PYZus{}relu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fc2}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+                \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fc3}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+        
+                \PY{k}{return} \PY{n}{x}
+\end{Verbatim}
+
+    \section{Custom Model on CIFAR}\label{custom-model-on-cifar}
+
+The CIFAR dataset consists of 50,000 train images and 10,000 test images
+(train:test ratio of 5:1). It has the classes: `airplane', `automobile',
+`bird', `cat', `deer', `dog', `frog', `horse', `ship', `truck'. The
+images in CIFAR-10 are of size (32, 32, 3), i.e. 3-channel color images
+of (32, 32) pixels in size (Krizhevsky \& Hinton, 2009, as cited in
+PyTorch, 2017).
+
+    \subsection{Import and Preprocess
+Data}\label{import-and-preprocess-data}
+
+Since the PyTorch library already has a version of the CIFAR dataset,
+minimal preprocessing had to be done. The data was transformed to a
+tensor and the RGB color channels were normalized using a mean and
+standard deviation of 0.5 across all three channels. The batch size was set to be 32.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} set batch size}
+        \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{32}
+        
+        \PY{c+c1}{\PYZsh{} transform images to tensor and normalize}
+        \PY{n}{transform} \PY{o}{=} \PY{n}{transforms}\PY{o}{.}\PY{n}{Compose}\PY{p}{(}
+            \PY{p}{[}\PY{n}{transforms}\PY{o}{.}\PY{n}{ToTensor}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+             \PY{n}{transforms}\PY{o}{.}\PY{n}{Normalize}\PY{p}{(}\PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} create dataloaders}
+        \PY{n}{trainset} \PY{o}{=} \PY{n}{torchvision}\PY{o}{.}\PY{n}{datasets}\PY{o}{.}\PY{n}{CIFAR10}\PY{p}{(}\PY{n}{root}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{train}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                                                \PY{n}{download}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{transform}\PY{o}{=}\PY{n}{transform}\PY{p}{)}
+        \PY{n}{trainloader} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{DataLoader}\PY{p}{(}\PY{n}{trainset}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{batch\PYZus{}size}\PY{p}{,}
+                                                  \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{num\PYZus{}workers}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+        
+        \PY{n}{testset} \PY{o}{=} \PY{n}{torchvision}\PY{o}{.}\PY{n}{datasets}\PY{o}{.}\PY{n}{CIFAR10}\PY{p}{(}\PY{n}{root}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{train}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                                               \PY{n}{download}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{transform}\PY{o}{=}\PY{n}{transform}\PY{p}{)}
+        \PY{n}{testloader} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{DataLoader}\PY{p}{(}\PY{n}{testset}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{batch\PYZus{}size}\PY{p}{,}
+                                                 \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{num\PYZus{}workers}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{classes} \PY{o}{=} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{plane}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{car}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bird}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{deer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{frog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{horse}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ship}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{truck}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Files already downloaded and verified
+Files already downloaded and verified
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of training data points: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{len(trainset)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of testing data points: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{len(testset)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Number of training data points: 50000
+Number of testing data points: 10000
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}images}\PY{p}{(}\PY{n}{dataloader}\PY{p}{,} \PY{n}{classes}\PY{p}{,} \PY{n}{image\PYZus{}number} \PY{o}{=} \PY{l+m+mi}{8}\PY{p}{,} \PY{n}{model} \PY{o}{=} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+        
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{    Function to plot a sample of images from the dataloader, alongside their class}
+        \PY{l+s+sd}{labels.}
+        \PY{l+s+sd}{    If a model is assigned to the model parameter, the predicted labels will be printed}
+        \PY{l+s+sd}{as well.}
+        
+        \PY{l+s+sd}{    Input:}
+        \PY{l+s+sd}{        dataloader (DATALOADER)}
+        \PY{l+s+sd}{            Dataloader of dataset.}
+        
+        \PY{l+s+sd}{        classes (ARR)}
+        \PY{l+s+sd}{            Array type object containing the class labels (strings) in the order that}
+        \PY{l+s+sd}{            corresponds with the numerical key in the dataloader.}
+        
+        \PY{l+s+sd}{        image\PYZus{}number (INT)}
+        \PY{l+s+sd}{            Number of images to plot from the dataloader. image\PYZus{}number should not exceed}
+        \PY{l+s+sd}{batch size.}
+        \PY{l+s+sd}{            Since images are plotted in a row, any number \PYZgt{} 10 could cause display}
+        \PY{l+s+sd}{issues.}
+        \PY{l+s+sd}{            Default: 8.}
+        
+        \PY{l+s+sd}{        model (PYTORCH MODEL)}
+        \PY{l+s+sd}{            Optional parameter. If a model is provided, the predicted labels from the}
+        \PY{l+s+sd}{model for each of the}
+        \PY{l+s+sd}{            images will be printed as well.}
+        \PY{l+s+sd}{            Default: None.}
+        \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+            \PY{c+c1}{\PYZsh{} get images and true labels}
+            \PY{n}{images}\PY{p}{,} \PY{n}{labels} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n+nb}{iter}\PY{p}{(}\PY{n}{dataloader}\PY{p}{)}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} plot images}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{off}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{n}{vutils}\PY{o}{.}\PY{n}{make\PYZus{}grid}\PY{p}{(}\PY{n}{images}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{n}{image\PYZus{}number}\PY{p}{]}\PY{p}{,}
+        \PY{n}{padding}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{normalize}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{o}{.}\PY{n}{cpu}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} print true labels}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{True labels: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{     }\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}5s}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{classes}\PY{p}{[}\PY{n}{labels}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{]} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in}
+        \PY{n+nb}{range}\PY{p}{(}\PY{n}{image\PYZus{}number}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+            \PY{k}{if} \PY{n}{model}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} predict image classes using custom net}
+                \PY{n}{outputs} \PY{o}{=} \PY{n}{model}\PY{p}{(}\PY{n}{images}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} the outputs are energies for the 10 classes.}
+                \PY{c+c1}{\PYZsh{} the higher the energy for a class, the more the network thinks that the image}
+        \PY{o+ow}{is} \PY{n}{of} \PY{n}{the} \PY{n}{particular} \PY{n}{class}\PY{o}{.}
+                \PY{c+c1}{\PYZsh{} So, we get the index of the highest energy:}
+                \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{predicted} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{outputs}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} print predicted labels}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Predicted:  }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{   }\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}5s}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{classes}\PY{p}{[}\PY{n}{predicted}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{]} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in}
+        \PY{n+nb}{range}\PY{p}{(}\PY{n}{image\PYZus{}number}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+\newpage
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} plot sample of training images}
+        \PY{n}{plot\PYZus{}images}\PY{p}{(}\PY{n}{trainloader}\PY{p}{,} \PY{n}{classes}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+True labels:  truck      deer      deer      frog     horse       cat      ship      bird
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{DL-Assignment-2_files/DL-Assignment-2_11_1.png}
+    \end{center}
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{from} \PY{n+nn}{torchsummary} \PY{k}{import} \PY{n}{summary}
+        
+        \PY{c+c1}{\PYZsh{} create custom CNN model for CIFAR dataset}
+        \PY{n}{cifar\PYZus{}net} \PY{o}{=} \PY{n}{Net}\PY{p}{(}\PY{n}{out\PYZus{}features} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{classes}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{cifar\PYZus{}net}\PY{p}{)}
+        \PY{n}{summary}\PY{p}{(}\PY{n}{cifar\PYZus{}net}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{32}\PY{p}{,}\PY{l+m+mi}{32}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Net(
+  (conv1): Conv2d(3, 6, kernel\_size=(3, 3), stride=(1, 1))
+  (pool): MaxPool2d(kernel\_size=2, stride=2, padding=0, dilation=1, ceil\_mode=False)
+  (conv2): Conv2d(6, 16, kernel\_size=(3, 3), stride=(1, 1))
+  (conv2\_bn): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True,
+track\_running\_stats=True)
+  (fc1): Linear(in\_features=576, out\_features=120, bias=True)
+  (dense1\_bn): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True,
+track\_running\_stats=True)
+  (fc2): Linear(in\_features=120, out\_features=84, bias=True)
+  (fc3): Linear(in\_features=84, out\_features=10, bias=True)
+)
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param \#
+================================================================
+            Conv2d-1            [-1, 6, 30, 30]             168
+         MaxPool2d-2            [-1, 6, 15, 15]               0
+            Conv2d-3           [-1, 16, 13, 13]             880
+       BatchNorm2d-4           [-1, 16, 13, 13]              32
+         MaxPool2d-5             [-1, 16, 6, 6]               0
+            Linear-6                  [-1, 120]          69,240
+       BatchNorm1d-7                  [-1, 120]             240
+            Linear-8                   [-1, 84]          10,164
+            Linear-9                   [-1, 10]             850
+================================================================
+Total params: 81,574
+Trainable params: 81,574
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.01
+Forward/backward pass size (MB): 0.10
+Params size (MB): 0.31
+Estimated Total Size (MB): 0.42
+----------------------------------------------------------------
+
+    \end{Verbatim}
+
+\newpage
+    \subsection{Model Training}\label{model-training}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{def} \PY{n+nf}{train\PYZus{}model}\PY{p}{(}\PY{n}{dataloader}\PY{p}{,} \PY{n}{model}\PY{p}{,} \PY{n}{criterion}\PY{p}{,} \PY{n}{optimizer}\PY{p}{,} \PY{n}{epochs} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{    Function to train a given model on a given dataset.}
+        
+        \PY{l+s+sd}{    Input:}
+        \PY{l+s+sd}{        dataloader (DATALOADER)}
+        \PY{l+s+sd}{            Dataloader of dataset.}
+        
+        \PY{l+s+sd}{        model (PYTORCH MODEL)}
+        \PY{l+s+sd}{            PyTorch model to be trained.}
+        
+        \PY{l+s+sd}{        criterion (CRITERION)}
+        \PY{l+s+sd}{            Criterion (loss function) to be used in training.}
+        
+        \PY{l+s+sd}{        optimizer (OPTIMIZER)}
+        \PY{l+s+sd}{            Optimizer to be used in training.}
+        
+        \PY{l+s+sd}{        epochs (INT)}
+        \PY{l+s+sd}{            Number of training epochs.}
+        \PY{l+s+sd}{            Default: 10}
+        
+        \PY{l+s+sd}{    Output:}
+        \PY{l+s+sd}{        train\PYZus{}loss (ARR)}
+        \PY{l+s+sd}{            Array of the model\PYZsq{}s running loss, calculated at every 200 iterations of training.}
+        
+        \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+            \PY{n}{train\PYZus{}loss} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+            \PY{k}{for} \PY{n}{epoch} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{epochs}\PY{p}{)}\PY{p}{:}  \PY{c+c1}{\PYZsh{} loop over the dataset multiple times}
+        
+                \PY{n}{running\PYZus{}loss} \PY{o}{=} \PY{l+m+mf}{0.0}
+        
+                \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{data} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{dataloader}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} loop through each batch}
+        
+                    \PY{c+c1}{\PYZsh{} get the inputs; data is a list of [inputs, labels]}
+                    \PY{n}{inputs}\PY{p}{,} \PY{n}{labels} \PY{o}{=} \PY{n}{data}
+        
+                    \PY{c+c1}{\PYZsh{} zero the parameter gradients}
+                    \PY{n}{optimizer}\PY{o}{.}\PY{n}{zero\PYZus{}grad}\PY{p}{(}\PY{p}{)}
+        
+                    \PY{c+c1}{\PYZsh{} forward + backward + optimize}
+                    \PY{n}{outputs} \PY{o}{=} \PY{n}{model}\PY{p}{(}\PY{n}{inputs}\PY{p}{)}
+                    \PY{n}{loss} \PY{o}{=} \PY{n}{criterion}\PY{p}{(}\PY{n}{outputs}\PY{p}{,} \PY{n}{labels}\PY{p}{)}
+                    \PY{n}{loss}\PY{o}{.}\PY{n}{backward}\PY{p}{(}\PY{p}{)}
+                    \PY{n}{optimizer}\PY{o}{.}\PY{n}{step}\PY{p}{(}\PY{p}{)}
+        
+                    \PY{c+c1}{\PYZsh{} print statistics}
+                    \PY{n}{running\PYZus{}loss} \PY{o}{+}\PY{o}{=} \PY{n}{loss}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}
+                    \PY{k}{if} \PY{n}{i} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{i} \PY{o}{\PYZpc{}} \PY{l+m+mi}{200} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}    \PY{c+c1}{\PYZsh{} print running\PYZus{}loss at every 200 iterations}
+                        \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{epoch+1\PYZcb{}, }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{i+1\PYZcb{}, loss: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{running\PYZus{}loss/200\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                        \PY{n}{train\PYZus{}loss}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{running\PYZus{}loss}\PY{o}{/}\PY{l+m+mi}{200}\PY{p}{)}
+                        \PY{n}{running\PYZus{}loss} \PY{o}{=} \PY{l+m+mf}{0.0}
+        
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Finished Training}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{k}{return} \PY{n}{train\PYZus{}loss}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} set loss and optimizer}
+         \PY{n}{criterion} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{CrossEntropyLoss}\PY{p}{(}\PY{p}{)}
+         \PY{n}{optimizer} \PY{o}{=} \PY{n}{optim}\PY{o}{.}\PY{n}{SGD}\PY{p}{(}\PY{n}{cifar\PYZus{}net}\PY{o}{.}\PY{n}{parameters}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{lr}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{,} \PY{n}{momentum}\PY{o}{=}\PY{l+m+mf}{0.9}\PY{p}{)}
+         
+         \PY{n}{train\PYZus{}loss} \PY{o}{=} \PY{n}{train\PYZus{}model}\PY{p}{(}\PY{n}{trainloader}\PY{p}{,} \PY{n}{model} \PY{o}{=} \PY{n}{cifar\PYZus{}net}\PY{p}{,}
+                                  \PY{n}{criterion} \PY{o}{=} \PY{n}{criterion}\PY{p}{,} \PY{n}{optimizer} \PY{o}{=} \PY{n}{optimizer}\PY{p}{,} \PY{n}{epochs} \PY{o}{=} \PY{l+m+mi}{50}\PY{p}{)}
+\end{Verbatim}
+
+\newpage
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+1, 201, loss: 2.275298808813095
+1, 401, loss: 2.1438225036859513
+1, 601, loss: 2.006584076285362
+.......................................
+.......................................
+50, 1001, loss: 0.3988352278620005
+50, 1201, loss: 0.42947908222675324
+50, 1401, loss: 0.4413864742219448
+Finished Training
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} plot training loss}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training Loss on CIFAR Dataset (50 epochs)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Epochs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training Loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{train\PYZus{}loss}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{train\PYZus{}loss}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} [<matplotlib.lines.Line2D at 0x1a233eb128>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{DL-Assignment-2_files/DL-Assignment-2_16_1.png}
+    \end{center}
+    
+    \subsection{Model Testing}\label{model-testing}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} plot sample of testing images with predicted and true labels}
+         \PY{n}{plot\PYZus{}images}\PY{p}{(}\PY{n}{testloader}\PY{p}{,} \PY{n}{classes}\PY{p}{,} \PY{n}{image\PYZus{}number}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{model}\PY{o}{=}\PY{n}{cifar\PYZus{}net}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+True labels:    cat      ship      ship     plane      frog      frog       car        frog
+Predicted:     cat    ship    ship   plane    frog    frog     car    frog
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{DL-Assignment-2_files/DL-Assignment-2_18_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k}{def} \PY{n+nf}{test\PYZus{}accuracy}\PY{p}{(}\PY{n}{dataloader}\PY{p}{,} \PY{n}{classes}\PY{p}{,} \PY{n}{model}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    Function for testing the accuracy of the model. The model weights are frozen when testing.}
+         
+         \PY{l+s+sd}{    Input:}
+         \PY{l+s+sd}{        dataloader (DATALOADER)}
+         \PY{l+s+sd}{            Dataloader of dataset to be tested on.}
+         
+         \PY{l+s+sd}{        classes (ARR)}
+         \PY{l+s+sd}{            Array type object containing the class labels (strings) in the order that}
+         \PY{l+s+sd}{            corresponds with the numerical key in the dataloader.}
+         
+         \PY{l+s+sd}{        model (PYTORCH MODEL)}
+         \PY{l+s+sd}{            Model to be used for testing.}
+         
+         \PY{l+s+sd}{    Output:}
+         \PY{l+s+sd}{        Prints the model\PYZsq{}s accuracy for each class label and the mean accuracy over all labels.}
+         
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+         
+             \PY{n}{class\PYZus{}correct} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{classes}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+             \PY{n}{class\PYZus{}total} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{classes}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         
+             \PY{k}{with} \PY{n}{torch}\PY{o}{.}\PY{n}{no\PYZus{}grad}\PY{p}{(}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} set no grad for testing}
+         
+                 \PY{k}{for} \PY{n}{data} \PY{o+ow}{in} \PY{n}{dataloader}\PY{p}{:}
+                     \PY{n}{images}\PY{p}{,} \PY{n}{labels} \PY{o}{=} \PY{n}{data} \PY{c+c1}{\PYZsh{} get one batch of images and labels}
+                     \PY{n}{outputs} \PY{o}{=} \PY{n}{model}\PY{p}{(}\PY{n}{images}\PY{p}{)} \PY{c+c1}{\PYZsh{} use model to predict labels from image batch}
+                     \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{predicted} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{outputs}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} get label index of class with highest energy}
+                     \PY{n}{c} \PY{o}{=} \PY{p}{(}\PY{n}{predicted} \PY{o}{==} \PY{n}{labels}\PY{p}{)}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} check whether predicted label == true label}
+         
+                     \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{label} \PY{o}{=} \PY{n}{labels}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                         \PY{n}{class\PYZus{}correct}\PY{p}{[}\PY{n}{label}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{c}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}
+                         \PY{n}{class\PYZus{}total}\PY{p}{[}\PY{n}{label}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         
+             \PY{n}{class\PYZus{}accuracy} \PY{o}{=} \PY{p}{[}\PY{n+nb}{round}\PY{p}{(}\PY{n}{class\PYZus{}correct}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{/}\PY{n}{class\PYZus{}total}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in}
+         \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{classes}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{classes}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{class\PYZus{}accuracy}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mean Accuracy: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{round(np.mean(class\PYZus{}accuracy),2)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} compare accuracy on train vs test set}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Train Set Accuracy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{test\PYZus{}accuracy}\PY{p}{(}\PY{n}{trainloader}\PY{p}{,} \PY{n}{classes}\PY{p}{,} \PY{n}{cifar\PYZus{}net}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test Set Accuracy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{test\PYZus{}accuracy}\PY{p}{(}\PY{n}{testloader}\PY{p}{,} \PY{n}{classes}\PY{p}{,} \PY{n}{cifar\PYZus{}net}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Train Set Accuracy
+('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
+[88.81, 95.12, 85.44, 80.59, 82.08, 82.65, 87.15, 94.08, 93.23, 91.75]
+Mean Accuracy: 88.09
+Test Set Accuracy
+('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
+[74.0, 76.12, 54.55, 45.16, 48.53, 65.52, 67.86, 62.71, 74.6, 76.62]
+Mean Accuracy: 64.57
+
+    \end{Verbatim}
+
+    \section{Custom Model on Novel
+Dataset}\label{custom-model-on-novel-dataset}
+
+The novel dataset consists of digital artworks scraped from
+artstation.com. The artworks can be seprated into three classes:
+"cyberpunk", "noir", and "cartoon". The original images are of size
+(400, 400, 3), i.e. 3-channel color images of (400, 400) pixels in size.\\
+
+The original dataset is rather imbalanced; there are
+\textasciitilde{}10,000 "cyberpunk" and "cartoon" images, but only
+\textasciitilde{}4,000 "noir" images. With both time constraints and the
+imbalanced dataset as incentives, I decided to use only
+\textasciitilde{}4,000 images from each class. The train:test ratio of the dataset was set to be 80:20.
+
+    \subsection{Import and Preprocess
+Data}\label{import-and-preprocess-data}
+
+I resized the images from (400, 400, 3) to (32, 32, 3) to match the
+CIFAR dataset. This was an intentional choice for quicker computation,
+and also allowed me to use the same model structure for both datasets.\\
+
+The batch size was set to 32, similar to the CIFAR training process. The
+RGB color channels were normalized using a mean and standard deviation
+of 0.5 across all three channels.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Use image folder dataset}
+         \PY{n}{dataroot} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{images/}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{image\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{32}
+         \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{32}
+         
+         \PY{n}{transform} \PY{o}{=} \PY{n}{transforms}\PY{o}{.}\PY{n}{Compose}\PY{p}{(}\PY{p}{[}
+                                        \PY{n}{transforms}\PY{o}{.}\PY{n}{Resize}\PY{p}{(}\PY{n}{image\PYZus{}size}\PY{p}{)}\PY{p}{,}
+                                        \PY{n}{transforms}\PY{o}{.}\PY{n}{CenterCrop}\PY{p}{(}\PY{n}{image\PYZus{}size}\PY{p}{)}\PY{p}{,}
+                                        \PY{n}{transforms}\PY{o}{.}\PY{n}{ToTensor}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                                        \PY{n}{transforms}\PY{o}{.}\PY{n}{Normalize}\PY{p}{(}\PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                                        \PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}target\PYZus{}index}\PY{p}{(}\PY{n}{dataset}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    Given a dataset, this function returns a dictionary of classes, where the value of each class}
+         \PY{l+s+sd}{    is a dictionary containing the class indices and the number of datapoints in the class.}
+         
+         \PY{l+s+sd}{    Input:}
+         \PY{l+s+sd}{        dataset (IMAGEFOLDER)}
+         \PY{l+s+sd}{            Dataset should be ImageFolder class.}
+         
+         \PY{l+s+sd}{    Output:}
+         \PY{l+s+sd}{        idx\PYZus{}dct (DCT)}
+         \PY{l+s+sd}{            Nested dictionary with the class name as key, and a dictionary containing the}
+         \PY{l+s+sd}{            \PYZsq{}indices\PYZsq{} and \PYZsq{}length\PYZsq{} of the class as values.}
+         \PY{l+s+sd}{            Example format:}
+         \PY{l+s+sd}{            idx\PYZus{}dct = \PYZob{} \PYZsq{}class\PYZus{}A\PYZsq{}:\PYZob{}}
+         \PY{l+s+sd}{                        \PYZsq{}indices\PYZsq{}: [1,2,3,4,5],}
+         \PY{l+s+sd}{                        \PYZsq{}length\PYZsq{}: 5}
+         \PY{l+s+sd}{                        \PYZcb{},}
+         \PY{l+s+sd}{                        \PYZsq{}class\PYZus{}B\PYZsq{}:\PYZob{}}
+         \PY{l+s+sd}{                        \PYZsq{}indices\PYZsq{}: [6,7,8],}
+         \PY{l+s+sd}{                        \PYZsq{}length\PYZsq{}: 3}
+         \PY{l+s+sd}{                        \PYZcb{},}
+         \PY{l+s+sd}{                        \PYZsq{}class\PYZus{}C\PYZsq{}:\PYZob{}}
+         \PY{l+s+sd}{                        \PYZsq{}indices\PYZsq{}: [100,101,102,103],}
+         \PY{l+s+sd}{                        \PYZsq{}length\PYZsq{}: 4}
+         \PY{l+s+sd}{                        \PYZcb{}\PYZcb{}}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{n}{targets} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{tensor}\PY{p}{(}\PY{p}{[}\PY{n}{t}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{dataset}\PY{o}{.}\PY{n}{samples}\PY{p}{]}\PY{p}{)}
+             \PY{n}{idx\PYZus{}dct} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         
+             \PY{k}{for} \PY{n}{k}\PY{p}{,}\PY{n}{v} \PY{o+ow}{in} \PY{n}{dataset}\PY{o}{.}\PY{n}{class\PYZus{}to\PYZus{}idx}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{idx\PYZus{}dct}\PY{p}{[}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{indices}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{(}\PY{n}{targets} \PY{o}{==} \PY{n}{v}\PY{p}{)}\PY{o}{.}\PY{n}{nonzero}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZcb{}}
+                 \PY{n}{idx\PYZus{}dct}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{idx\PYZus{}dct}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{indices}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+             \PY{k}{return} \PY{n}{idx\PYZus{}dct}
+         
+         \PY{k}{def} \PY{n+nf}{create\PYZus{}train\PYZus{}test}\PY{p}{(}\PY{n}{dataset}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{train\PYZus{}ratio} \PY{o}{=} \PY{l+m+mf}{0.8}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    Creates a train and test dataset by:}
+         \PY{l+s+sd}{    1) balancing the dataset (shorten each class to the size of the min class length)}
+         \PY{l+s+sd}{    2) slicing the class indices according to the train\PYZus{}ratio and test\PYZus{}ratio, i.e. 1 \PYZhy{}}
+         \PY{l+s+sd}{train\PYZus{}ratio}
+         \PY{l+s+sd}{    3) creating train and test samplers using the indices}
+         \PY{l+s+sd}{    4) creating train and test loaders using the samplers}
+         
+         \PY{l+s+sd}{    Input:}
+         \PY{l+s+sd}{        dataset (IMAGEFOLDER)}
+         \PY{l+s+sd}{            Imagefolder type object containing the dataset.}
+         
+         \PY{l+s+sd}{        batch\PYZus{}size (INT)}
+         \PY{l+s+sd}{            Batch size for creating the dataloader. This will impact the model training}
+         \PY{l+s+sd}{            process as well.}
+         
+         \PY{l+s+sd}{        train\PYZus{}ratio (FLOAT)}
+         \PY{l+s+sd}{            The ratio of training data to testing data. Value should be between 0 and 1.}
+         \PY{l+s+sd}{            Default: 0.8}
+         
+         \PY{l+s+sd}{    Output:}
+         \PY{l+s+sd}{        trainloader (DATALOADER)}
+         \PY{l+s+sd}{            Dataloader of training set.}
+         
+         \PY{l+s+sd}{        testloader (DATALOADER)}
+         \PY{l+s+sd}{            Dataloader of testing set.}
+         
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+         
+             \PY{n}{index\PYZus{}dct} \PY{o}{=} \PY{n}{get\PYZus{}target\PYZus{}index}\PY{p}{(}\PY{n}{dataset}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} returns the length of the class with the min length}
+             \PY{n}{balance\PYZus{}size} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n}{index\PYZus{}dct}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{key}\PY{o}{=}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             \PY{n}{train\PYZus{}size} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{train\PYZus{}ratio}\PY{o}{*}\PY{n}{balance\PYZus{}size}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Each class is shortened to }\PY{l+s+si}{\PYZob{}balance\PYZus{}size\PYZcb{}}\PY{l+s+s2}{ and split into training size of}
+         \PY{p}{\PYZob{}}\PY{n}{train\PYZus{}size}\PY{p}{\PYZcb{}} \PY{o+ow}{and} \PY{n}{testing} \PY{n}{size} \PY{n}{of} \PY{p}{\PYZob{}}\PY{n}{balance\PYZus{}size}\PY{o}{\PYZhy{}}\PY{n}{train\PYZus{}size}\PY{p}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{)}
+         
+             \PY{n}{train\PYZus{}indices} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{cat}\PY{p}{(}\PY{p}{[}\PY{n}{v}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{indices}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{n}{train\PYZus{}size}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{k}{for} \PY{n}{v} \PY{o+ow}{in}
+         \PY{n}{index\PYZus{}dct}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{dim} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{test\PYZus{}indices} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{cat}\PY{p}{(}\PY{p}{[}\PY{n}{v}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{indices}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{train\PYZus{}size}\PY{p}{:}\PY{n}{balance\PYZus{}size}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{k}{for} \PY{n}{v}
+         \PY{o+ow}{in} \PY{n}{index\PYZus{}dct}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{dim} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+         
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Length of training indices: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{len(train\PYZus{}indices)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Length of testing indices: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{len(test\PYZus{}indices)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+             \PY{n}{train\PYZus{}sampler} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{sampler}\PY{o}{.}\PY{n}{SubsetRandomSampler}\PY{p}{(}\PY{n}{train\PYZus{}indices}\PY{p}{)}
+             \PY{n}{test\PYZus{}sampler} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{sampler}\PY{o}{.}\PY{n}{SubsetRandomSampler}\PY{p}{(}\PY{n}{test\PYZus{}indices}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} create dataloaders}
+             \PY{n}{trainloader} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{DataLoader}\PY{p}{(}\PY{n}{dataset}\PY{p}{,} \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{sampler}\PY{o}{=} \PY{n}{train\PYZus{}sampler}\PY{p}{)}
+             \PY{n}{testloader} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{DataLoader}\PY{p}{(}\PY{n}{dataset}\PY{p}{,} \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{sampler} \PY{o}{=}\PY{n}{test\PYZus{}sampler}\PY{p}{)}
+         
+             \PY{k}{return} \PY{n}{trainloader}\PY{p}{,} \PY{n}{testloader}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} load dataset from my local directory}
+         \PY{n}{dataset} \PY{o}{=} \PY{n}{torchvision}\PY{o}{.}\PY{n}{datasets}\PY{o}{.}\PY{n}{ImageFolder}\PY{p}{(}\PY{n}{root} \PY{o}{=} \PY{n}{dataroot}\PY{p}{,} \PY{n}{transform} \PY{o}{=} \PY{n}{transform}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} create trainloader and testloader}
+         \PY{n}{novel\PYZus{}trainloader}\PY{p}{,} \PY{n}{novel\PYZus{}testloader} \PY{o}{=} \PY{n}{create\PYZus{}train\PYZus{}test}\PY{p}{(}\PY{n}{dataset}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{train\PYZus{}ratio}\PY{o}{=} \PY{l+m+mf}{0.8}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Each class is shortened to 3567 and split into training size of 2853 and testing size of 714
+Length of training indices: 8559
+Length of testing indices: 2142
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} plot sample of training images}
+         \PY{n}{plot\PYZus{}images}\PY{p}{(}\PY{n}{novel\PYZus{}trainloader}\PY{p}{,} \PY{n}{dataset}\PY{o}{.}\PY{n}{classes}\PY{p}{,} \PY{n}{image\PYZus{}number}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+True labels:   noir      noir     cartoon     cyberpunk     cyberpunk     cyberpunk     cartoon      noir
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{DL-Assignment-2_files/DL-Assignment-2_26_1.png}
+    \end{center}
+    
+    \subsection{Model Training}\label{model-training}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} create custom CNN model for CIFAR dataset}
+         \PY{n}{novel\PYZus{}net} \PY{o}{=} \PY{n}{Net}\PY{p}{(}\PY{n}{out\PYZus{}features} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{dataset}\PY{o}{.}\PY{n}{classes}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{novel\PYZus{}net}\PY{p}{)}
+         \PY{n}{summary}\PY{p}{(}\PY{n}{novel\PYZus{}net}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{32}\PY{p}{,}\PY{l+m+mi}{32}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Net(
+  (conv1): Conv2d(3, 6, kernel\_size=(3, 3), stride=(1, 1))
+  (pool): MaxPool2d(kernel\_size=2, stride=2, padding=0, dilation=1, ceil\_mode=False)
+  (conv2): Conv2d(6, 16, kernel\_size=(3, 3), stride=(1, 1))
+  (conv2\_bn): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True,
+track\_running\_stats=True)
+  (fc1): Linear(in\_features=576, out\_features=120, bias=True)
+  (dense1\_bn): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True,
+track\_running\_stats=True)
+  (fc2): Linear(in\_features=120, out\_features=84, bias=True)
+  (fc3): Linear(in\_features=84, out\_features=3, bias=True)
+)
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param \#
+================================================================
+            Conv2d-1            [-1, 6, 30, 30]             168
+         MaxPool2d-2            [-1, 6, 15, 15]               0
+            Conv2d-3           [-1, 16, 13, 13]             880
+       BatchNorm2d-4           [-1, 16, 13, 13]              32
+         MaxPool2d-5             [-1, 16, 6, 6]               0
+            Linear-6                  [-1, 120]          69,240
+       BatchNorm1d-7                  [-1, 120]             240
+            Linear-8                   [-1, 84]          10,164
+            Linear-9                    [-1, 3]             255
+================================================================
+Total params: 80,979
+Trainable params: 80,979
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.01
+Forward/backward pass size (MB): 0.10
+Params size (MB): 0.31
+Estimated Total Size (MB): 0.42
+----------------------------------------------------------------
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} set loss and optimizer}
+         \PY{n}{criterion} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{CrossEntropyLoss}\PY{p}{(}\PY{p}{)}
+         \PY{n}{optimizer} \PY{o}{=} \PY{n}{optim}\PY{o}{.}\PY{n}{SGD}\PY{p}{(}\PY{n}{novel\PYZus{}net}\PY{o}{.}\PY{n}{parameters}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{lr}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{,} \PY{n}{momentum}\PY{o}{=}\PY{l+m+mf}{0.9}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} train the model}
+         \PY{n}{novel\PYZus{}train\PYZus{}loss} \PY{o}{=} \PY{n}{train\PYZus{}model}\PY{p}{(}\PY{n}{novel\PYZus{}trainloader}\PY{p}{,} \PY{n}{model} \PY{o}{=} \PY{n}{novel\PYZus{}net}\PY{p}{,}
+                                         \PY{n}{criterion} \PY{o}{=} \PY{n}{criterion}\PY{p}{,} \PY{n}{optimizer} \PY{o}{=} \PY{n}{optimizer}\PY{p}{,} \PY{n}{epochs} \PY{o}{=}\PY{l+m+mi}{50}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+1, 201, loss: 1.0734337297081948
+2, 201, loss: 1.0117309030890465
+3, 201, loss: 0.9854243528842926
+......................................................
+......................................................
+48, 201, loss: 0.20643562380224467
+49, 201, loss: 0.2001702824421227
+50, 201, loss: 0.20168843919411303
+Finished Training
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} plot training loss}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training Loss on Novel Dataset (50 epochs)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Epochs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training Loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{novel\PYZus{}train\PYZus{}loss}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{novel\PYZus{}train\PYZus{}loss}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} [<matplotlib.lines.Line2D at 0x1a24c679b0>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{DL-Assignment-2_files/DL-Assignment-2_30_1.png}
+    \end{center}
+    
+    \newpage
+    \subsection{Model Testing}\label{model-testing}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} plot sample of testing images with predicted and true labels}
+         \PY{n}{plot\PYZus{}images}\PY{p}{(}\PY{n}{novel\PYZus{}testloader}\PY{p}{,} \PY{n}{dataset}\PY{o}{.}\PY{n}{classes}\PY{p}{,} \PY{n}{image\PYZus{}number}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{model}\PY{o}{=}\PY{n}{novel\PYZus{}net}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+True labels:  cyberpunk     cartoon      noir     cartoon     cyberpunk     cyberpunk      cartoon     cyberpunk
+Predicted:   cartoon   cartoon   cyberpunk   cyberpunk    noir   cyberpunk   cartoon    noir
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{DL-Assignment-2_files/DL-Assignment-2_32_1.png}
+    \end{center}
+
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} compare accuracy on train vs test set}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Train Set Accuracy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{test\PYZus{}accuracy}\PY{p}{(}\PY{n}{novel\PYZus{}trainloader}\PY{p}{,} \PY{n}{dataset}\PY{o}{.}\PY{n}{classes}\PY{p}{,} \PY{n}{novel\PYZus{}net}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test Set Accuracy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{test\PYZus{}accuracy}\PY{p}{(}\PY{n}{novel\PYZus{}testloader}\PY{p}{,} \PY{n}{dataset}\PY{o}{.}\PY{n}{classes}\PY{p}{,} \PY{n}{novel\PYZus{}net}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Train Set Accuracy
+['cartoon', 'cyberpunk', 'noir']
+[92.59, 90.0, 95.81]
+Mean Accuracy: 92.8
+Test Set Accuracy
+['cartoon', 'cyberpunk', 'noir']
+[56.14, 60.61, 47.73]
+Mean Accuracy: 54.83
+    \end{Verbatim}
+
+    \section{Result Summary}\label{result-summary}
+
+\subsection{CIFAR Performance}\label{cifar-performance}
+
+\subsubsection*{Train Set Accuracy}\label{train-set-accuracy}
+
+('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship',
+'truck')
+
+{[}88.81, 95.12, 85.44, 80.59, 82.08, 82.65, 87.15, 94.08, 93.23,
+91.75{]}
+
+Mean Accuracy: 88.09
+
+\subsubsection*{Test Set Accuracy}\label{test-set-accuracy}
+
+('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship',
+'truck')
+
+{[}74.0, 76.12, 54.55, 45.16, 48.53, 65.52, 67.86, 62.71, 74.6, 76.62{]}
+
+Mean Accuracy: 64.57
+
+\subsection{Novel Dataset Performance}\label{novel-dataset-performance}
+
+\subsubsection*{Train Set Accuracy}\label{train-set-accuracy-1}
+
+{[}'cartoon', 'cyberpunk', 'noir'{]}
+
+{[}92.59, 90.0, 95.81{]}
+
+Mean Accuracy: 92.8
+
+\subsubsection*{Test Set Accuracy}\label{test-set-accuracy-1}
+
+{[}'cartoon', 'cyberpunk', 'noir'{]}
+
+{[}56.14, 60.61, 47.73{]}
+
+Mean Accuracy: 54.83
+
+\subsection{Comparison}\label{comparison}
+
+My custom model performs well during training on both datasets, reaching
+an accuracy of 88.09\% on the CIFAR dataset, and an accuracy of 92.8\%
+on my novel dataset. The mean test set accuracy for CIFAR is 64.57\% (we
+expect an untrained model to have 10\% accuracy since there are 10
+classes), with the 'truck' class having the highest test accuracy of
+76.62\%, and 'cat' having the lowest test accuracy of 45.16\%.\\
+
+The mean test set accuracy for the novel dataset is 54.83\% (we expect
+an untrained model to have a 33.33\% accuracy since there are 3
+classes), with the 'cyberpunk' class having the highest test accuracy of
+60.61\%, and 'noir' having the lowest test accuracy of 47.73\%. Since I
+carefully balanced the dataset before splitting it into train and test
+sets, I do not think that this is due to dataset imbalance.\\
+
+It should also be noted that while the training loss decreased
+exponentially when the model was training on CIFAR, it appears to
+decrease linearly when training on my novel dataset. This leads me to
+believe that the model may just be overfitting on the training set
+instead of actually "learning" how to classify the 3 classes. If the
+model was learning differentiable features, we expect an "elbow" point
+where the loss sharply decreases as the model has learned key features
+that can be used to classify new data. I am not sure what a linearly
+decreasing loss suggests, but it does not seem like the typical behavior
+of a model that is actually "learning" key features. My dataset was much
+smaller than CIFAR (train:test size of 8559:2142 vs CIFAR's
+50,000:10,000), which could explain the overfit.\\
+
+In the future, I would probably use more data for my model, augment the
+data to increase dataset size (e.g. through random horizontal flips), or
+experiment with different batch sizes since I used the same batch size
+of 32 for both models.
+
+\newpage
+    \section*{References}\label{references}
+
+Bjorck, N., Gomes, C. P., Selman, B., \& Weinberger, K. Q. (2018).
+Understanding batch normalization. In Advances in Neural Information
+Processing Systems (pp. 7694-7705).\\
+
+Bushaev, V. (2018, October 24). Adam-latest trends in deep learning
+optimization. Retrieved November 14, 2019, from
+https://towardsdatascience.com/adam-latest-trends-in-deep-learning-optimization-6be9a291375c.\\
+
+Karpathy, A., \& Johnson, J. (2017). CS231n: Convolutional Neural
+Networks for Visual Recognition-Transfer Learning. Retrieved November
+13, 2019, from https://cs231n.github.io/transfer-learning/\#tf.\\
+
+Kingma, D. P., \& Ba, J. (2014). Adam: A method for stochastic
+optimization. arXiv preprint arXiv:1412.6980.\\
+
+Krizhevsky, A., \& Hinton, G. (2009). Learning multiple layers of
+features from tiny images (Vol. 1, No. 4, p. 7). Technical report,
+University of Toronto.\\
+
+Li, X., Chen, S., Hu, X., \& Yang, J. (2019). Understanding the
+disharmony between dropout and batch normalization by variance shift. In
+Proceedings of the IEEE Conference on Computer Vision and Pattern
+Recognition (pp. 2682-2690).\\
+
+Maas, A. L., Hannun, A. Y., \& Ng, A. Y. (2013, June). Rectifier
+nonlinearities improve neural network acoustic models. In Proc. icml
+(Vol. 30, No. 1, p. 3).\\
+
+PyTorch. (2017). Training a Classifier¶. Retrieved November 13, 2019,
+from
+https://pytorch.org/tutorials/beginner/blitz/cifar10\_tutorial.html.\\
+
+Ioffe, S. \& Szegedy, C. (2015) Batch normalization: Accelerating deep
+network training by reducing internal covariate shift. In International
+Conference on Machine Learning, pages 448--456.\\
+
+Srivastava, N., Hinton, G., Krizhevsky, A., Sutskever, I., \&
+Salakhutdinov, R. (2014). Dropout: a simple way to prevent neural
+networks from overfitting. The journal of machine learning research,
+15(1), 1929-1958.\\
+
+Szegedy, C., Liu, W., Jia, Y., Sermanet, P., Reed, S., Anguelov, D., ...
+\& Rabinovich, A. (2015). Going deeper with convolutions. In Proceedings
+of the IEEE conference on computer vision and pattern recognition (pp.
+1-9).\\
+
+\newpage
+    \section*{Appendix A: Pretrained Model Write-Up}\label{appendix}
+
+I originally intended to compare my custom model's performance to a
+pretrained model, but was not able to due to time constraints. The
+paragraphs below show the literature research I had conducted in
+preparation of performing the transfer learning task.
+
+\subsection*{The Pretrained Model}\label{the-pretrained-model}
+
+The pretrained model used was GoogLeNet, a 22 layers deep network that
+was trained on the ImageNet dataset (Szegedy, Liu, Jia, Sermanet, Reed,
+Anguelov,... \& Rabinovich, 2015). I chose to use the pretrained model
+as a fixed feature extractor by freezing every layer of the network
+(except the final layer) and training a new final classification layer
+on the dataset. This is much more resource and time efficient compared
+to finetuning the model, i.e. continue training the weights via
+backpropogation on the new dataset.\\
+
+According to Karpathy and Johnson (2017), when a dataset is large and
+similar to the original pretrained dataset (in this case, ImageNet), it
+is safer to finetune the pretrained model since there is lower
+probability of overfitting. When a dataset is small and very different
+from the original dataset, it is best to only train a linear classifier
+on the final layer to avoid overfitting. They also recommend training
+the classifier from "activations somewhere earlier in the network",
+since the top of the network might contain more features specific to the
+original data. However, they also mention that arbitrarily taking out
+Convolutional layers from the pretrained network may negatively affect
+performance.
+
+\subsubsection*{CIFAR Dataset}\label{cifar-dataset}
+
+Since the CIFAR dataset is large and similar to the ImageNet dataset,
+the pretrained model should work well as a fixed feature extractor.
+Finetuning the model could improve performance with minimal risk of
+overfit, but as mentioned above, the weights were frozen instead to save
+time and computational resource.
+
+\subsubsection*{Novel Dataset}\label{novel-dataset}
+
+Since the dataset is both small and very different compared to the
+original ImageNet dataset, it made sense to use the pretrained GoogLeNet
+as a fixed-feature extractor.
+
+\section*{Appendix B: Link to Code}
+
+A jupyter notebook of the full code can be found here:
+\url{}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
