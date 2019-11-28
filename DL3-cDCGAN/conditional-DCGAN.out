@@ -20,12 +20,3 @@
 \BOOKMARK [1][-]{section.10}{Mode Collapse}{}% 20
 \BOOKMARK [1][-]{section.11}{Future Work}{}% 21
 \BOOKMARK [1][-]{section.12}{Code}{}% 22
-\BOOKMARK [2][-]{subsection.12.1}{Import Libraries}{section.12}% 23
-\BOOKMARK [2][-]{subsection.12.2}{Set Parameter Values}{section.12}% 24
-\BOOKMARK [2][-]{subsection.12.3}{Import Data}{section.12}% 25
-\BOOKMARK [2][-]{subsection.12.4}{CIFAR10 Dataset}{section.12}% 26
-\BOOKMARK [2][-]{subsection.12.5}{Novel Dataset}{section.12}% 27
-\BOOKMARK [2][-]{subsection.12.6}{cDCGAN Model}{section.12}% 28
-\BOOKMARK [2][-]{subsection.12.7}{CIFAR10 Model}{section.12}% 29
-\BOOKMARK [2][-]{subsection.12.8}{Novel Dataset Model}{section.12}% 30
-\BOOKMARK [2][-]{subsection.12.9}{Functions for Visualizing Results}{section.12}% 31
