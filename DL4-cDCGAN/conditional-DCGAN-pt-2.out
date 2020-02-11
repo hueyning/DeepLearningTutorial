@@ -1,0 +1,27 @@
+\BOOKMARK [1][-]{section.1}{Author's Note}{}% 1
+\BOOKMARK [1][-]{section.2}{Introduction}{}% 2
+\BOOKMARK [1][-]{section.3}{Literature Review}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Conditional GAN}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Embedding Class Labels}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{Implementation}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.4}{How should labels be broadcasted from 1D to 4D?}{section.3}% 7
+\BOOKMARK [1][-]{section.4}{Data}{}% 8
+\BOOKMARK [1][-]{section.5}{Parameter Values}{}% 9
+\BOOKMARK [1][-]{section.6}{Implementation}{}% 10
+\BOOKMARK [2][-]{subsection.6.1}{Training Process}{section.6}% 11
+\BOOKMARK [1][-]{section.7}{Results}{}% 12
+\BOOKMARK [2][-]{subsection.7.1}{CIFAR10 Model Results}{section.7}% 13
+\BOOKMARK [3][-]{subsubsection.7.1.1}{Novel Dataset Model Results}{subsection.7.1}% 14
+\BOOKMARK [1][-]{section.8}{Analysis and Summary}{}% 15
+\BOOKMARK [1][-]{section.9}{Future Work}{}% 16
+\BOOKMARK [2][-]{subsection.9.1}{Increasing the amount of label attributes embedded into the data}{section.9}% 17
+\BOOKMARK [2][-]{subsection.9.2}{Studying and Replicating ArtGAN}{section.9}% 18
+\BOOKMARK [2][-]{subsection.9.3}{Import Libraries}{section.9}% 19
+\BOOKMARK [2][-]{subsection.9.4}{Set Parameter Values}{section.9}% 20
+\BOOKMARK [2][-]{subsection.9.5}{Import Data}{section.9}% 21
+\BOOKMARK [2][-]{subsection.9.6}{CIFAR10 Dataset}{section.9}% 22
+\BOOKMARK [2][-]{subsection.9.7}{Novel Dataset}{section.9}% 23
+\BOOKMARK [2][-]{subsection.9.8}{cDCGAN Model}{section.9}% 24
+\BOOKMARK [2][-]{subsection.9.9}{CIFAR10 Model}{section.9}% 25
+\BOOKMARK [2][-]{subsection.9.10}{Novel Dataset Model}{section.9}% 26
+\BOOKMARK [2][-]{subsection.9.11}{Functions for Visualizing Results}{section.9}% 27

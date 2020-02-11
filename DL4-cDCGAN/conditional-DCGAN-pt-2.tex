@@ -1,0 +1,2100 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Conditional Deep Convolutional Generative Adversarial Network
+(cDCGAN) - Exploring Different
+Architectures}
+    \author{Huey Ning Lok}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+  
+
+\section{Author's Note}\label{authors-note}
+
+In my previous cDCGAN assignment, I built a cDCGAN and trained it on
+both the CIFAR10 and my novel dataset (of cyberpunk, cartoon, and noir
+artwork) for 60 epochs. I embedded the conditional input into the
+discriminator by concatenating it with the network activations from the
+convolutional blocks, right before they are fed into the final linear
+layer. The results showed some visual differences between the different
+CIFAR10 classes, even if the generated images did not really resemble
+the real images. The generated images for the novel dataset however had
+a high degree of visual similarity and were virtually indiscernible as
+different classes, except for minute visual differences such as slight
+variations in color intensity. My conclusion was that the model may be
+experiencing mode collapse, and that the underlying data itself may have
+low inter-class variation in the first place, thus exacerbating the mode
+collapse effect.\\
+
+All working code for this notebook can be found here:
+
+\url{https://github.com/hueyning/DeepLearningTutorial/blob/master/DL4-cDCGAN-pt-2/conditional-DCGAN-pt-2.ipynb}
+
+\section{Introduction}\label{introduction}
+
+In this assignment, I intend to expand on the previous cDCGAN assignment
+by exploring different conditional DCGAN architectures. Since neural
+networks often operate in a black box, it is common to experiment with
+different network architectures to test out which one outperforms the
+other. As networks that are both deep and convolutional have been shown
+to return the best performance when working with image-related tasks,
+the different architectures to be explored will most likely still be
+deep and convolutional, with a modification being made to either the
+label-embedding method, or adding an upsampling method to increase image
+quality.
+
+\section{Literature Review}\label{literature-review}
+
+\subsection{Conditional GAN}\label{conditional-gan}
+
+According to Mirza and Osindero (2014), "Generative adversarial nets can
+be extended to a conditional model if both the generator and
+discriminator are conditioned on some extra information \(y\). \(y\)
+could be any kind of auxiliary information, such as class labels or data
+from other modalities. We can perform the conditioning by feeding \(y\)
+into both the discriminator and generator as additional input layer."
+
+Some motivations for including the class label within the input are
+(Brownlee, 2019):
+
+\begin{itemize}
+\item
+  To improve GAN performance by making use of additional information
+  (class labels) that is correlated with the input images.
+\item
+  To generate targeted images.
+\end{itemize}
+
+\subsection{Embedding Class Labels}\label{embedding-class-labels}
+
+Given a conditional GAN model, there are a few ways that one can choose
+to embed the class label. The efficacy of each embedding method in
+utilizing the label information to generate fake images and discriminate
+real images from fake ones can then be evaluated by comparing the
+quality of fake conditional images generated using the different
+methods.
+
+\paragraph{cGAN vs cDCGAN}\label{cgan-vs-cdcgan}
+
+In a vanilla conditional GAN network with linear layers, \(y\) could be
+embedded into the input via simple concatenation. According to Brownlee
+(2019), one of the best practices in encoding and incorporating class
+labels into both the discriminator and generator models entails "using
+an embedding layer followed by a fully connected layer with a linear
+activation that scales the embedding to the size of the image before
+concatenating it in the model as an additional channel or feature map".\\
+
+In a conditional DCGAN network with convolutional layers, the encoding
+of class labels becomes a bit trickier since the images are not
+flattened into a single dimension before being fed into the network.
+Instead, the DCGAN network normally takes in an input of 3 dimensions,
+i.e. width x heights x number of channels. The image is then
+continuously convolved through multiple kernels in the network without
+ever having to be flattened until a final classification decision has to
+be made using a linear layer (e.g. sigmoid) at the output.
+
+\paragraph{Label-Embedding Methods}\label{label-embedding-methods}
+
+The figure below illustrates the different network architectures tested
+out by Cao, Dulloor, and Prasetio (2017) while building a conditional
+GAN to generate faces. The networks differ in the type of layers used
+(convolutional vs fully-connected) and the label-embedding method. Since
+cDenseGAN\#1 and cDenseGAN\#2 consist of only fully-connected layers, I
+will instead focus on the cDCGAN networks.\\
+
+    \begin{center}
+    \adjustimage{max size={0.7\linewidth}{0.9\paperheight}}{report-figures/cGAN-archs.png}
+    \end{center}
+
+The label-embedding method for the cDCGAN networks, alongside their
+motivation and results were as follows:
+
+\begin{itemize}
+\item
+  \textbf{cDCGAN\#1}. Labels fed only to the first layer of the
+  generator and discriminator. This method would seem like the most
+  intuitive and obvious way of attempting to concatenate labels to an
+  image being fed into a deep convolutional network. The results showed
+  decent image quality.
+  
+      \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.9\paperheight}}{report-figures/cdcgan-outputs.png}
+    \end{center}
+  
+\item
+  \textbf{cDCGAN\#2}. Labels fed to every single layer of the generator
+  and discriminator. The motivation behind this method was that "given
+  sufficient mixing of conditionals at every layer, the model will be
+  able to better learn the joint distribution of images and labels and
+  produce good quality images with the correct identities" (Cao,
+  Dulloor, \& Prasetio, 2017). However, the generated images were of
+  very poor quality, i.e. highly pixelated and off-colour. The authors
+  attributed this to the fact that mixing labels in every layer of the
+  network resulted in a very sparse tensor with a lot of zeros in each
+  of the layers (since the labels are concatenated to the layers as
+  one-hot-encoded tensors).
+\item
+  \textbf{cDCGAN\#3}. Labels fed straight to the fully-connected layers
+  of both the generator and the discriminator. The idea being that
+  "there is no good reason to inject conditionals at any of the
+  convolutional layers since conditionals do not have any spatial
+  aspect" (Cao, Dulloor, \& Prasetio, 2017). The results showed a
+  significant improvement in generated image quality.
+\end{itemize}
+
+The \textbf{cDCGAN\#1} network aligns with Kang's (2017) method of
+embedding the class labels to the image by concatenating the labels to
+the first convolutional layer. This means the image was "conditioned" on
+the class before going through the main convolutional layers.\\
+
+Wang, Dantcheva, and Bremond (2018) also utilized this architecture when
+generating faces based on attributes that should affect facial
+appearance, e.g. male/female, young/old, smile/no smile.\\
+
+      \begin{center}
+    \adjustimage{max size={0.7\linewidth}{0.9\paperheight}}{report-figures/wang-network.png}
+    \end{center}
+    
+          \begin{center}
+    \adjustimage{max size={0.7\linewidth}{0.9\paperheight}}{report-figures/wang-results.png}
+    \end{center}
+    
+          \begin{center}
+    \adjustimage{max size={0.7\linewidth}{0.9\paperheight}}{report-figures/wang-eval.png}
+    \end{center}
+
+Their results showed a higher Inception Score (IS) and lower Fréchet
+Inception Distance (FID) when the model is trained on a higher number of
+conditional attributes. Since a high IS represents high generated image
+diversity and a low FID signifies that the generated images have low
+amount of different with the real images from the original dataset,
+their results suggest that the more conditionals the model can use as
+information, the higher quality the generated images (as evaluated by IS
+and FID). As such, apart from the network architecture itself, there is
+also a consideration of the type and quantity of data that is being fed
+into the network.\\
+
+The \textbf{cDCGAN\#3} network aligns with Desai's (2018) method of
+embedding the class labels to the image after the convolutional layers,
+but before the input is fed into the fully-connected layers of the
+network. That is, given a conventional deep CNN model structured as
+\texttt{INPUT\ -\textgreater{}\ {[}CONV\ -\textgreater{}\ RELU\ -\textgreater{}\ POOL{]}*2\ -\textgreater{}\ FC\ -\textgreater{}\ RELU\ -\textgreater{}\ FC}
+(Karpathy \& Johnson, 2017), the class labels will be concatenated after
+the \texttt{CONV} block but before the \texttt{FC} layers.
+
+\paragraph{Architectural Choice for this
+Assignment}\label{architectural-choice-for-this-assignment}
+
+In my previous assignment, I implemented Desai's (2018) method, aka
+\textbf{cDCGAN\#3}, as I liked his reasoning that the class label should
+be considered a "higher-level" feature that would be embedded near the
+tail-end of the conditional DCGAN to provide further information to the
+network. Indeed, Cao, Dulloor, and Prasetio's (2017) empirical results
+also show that this architecture produces the best images, as evaluated
+both qualitatively (manual inspection) and quantitatively (since the
+images were celebrity faces, face-detection and ID-matching software
+were used to calculate quantitative results).\\
+
+In this assignment, I plan to implement Kang's (2017) method, aka
+\textbf{cDCGAN\#1}, to compare the results against those of my previous
+assignment. While Cao, Dulloor, and Prasetio (2017) have already shown
+\textbf{cDCGAN\#3} to be the superior architecture, it is still worth
+investigating the difference in generated image quality between
+\textbf{cDCGAN\#1} and \textbf{cDCGAN\#3} for myself since I am working
+with a novel dataset (cyberpunk, noir, and cartoon artwork). I can then
+compare the genre-conditioned artwork generated by each network to each
+other to evaluate the efficacy of the different models.
+
+    \subsection{Implementation}\label{implementation}
+
+Following the footsteps of Wang, Dantcheva, and Bremond (2018); and Cao,
+Dulloor, and Prasetio's (2017) \textbf{\#cDCGAN1 architecture}, I
+modified my DCGAN model to make use of conditional labels by embedding
+the labels in the early convolutional layers of the DCGAN network. I
+made reference to Kang's (2017) github repo - which contained a Pytorch
+implementation of a conditional GAN with labels embedded in the
+convolutional layer - and adapted his code to that of my existing model.
+
+\subsection{How should labels be broadcasted from 1D to
+4D?}\label{how-should-labels-be-broadcasted-from-1d-to-4d}
+
+      \begin{center}
+    \adjustimage{max size={1.0\linewidth}{0.9\paperheight}}{report-figures/kang-cdcgan.png}
+    \end{center}
+
+In Kang's (2017) illustration of his network architecture, we see that
+that labels are broadcast from a 1D tensor to a 4D tensor before being
+fed into both the discriminator and the generator. This is so the 4D
+label tensors can be concatenated to the 4D image tensors
+({[}batch\_size, number\_of\_channels, width, height{]}) before being
+passed along the convolution layers of the network.\\
+
+I was quite confused as to how to broadcast a 1D shape to a 4D shape
+without losing any information, or misrepresenting the label
+information. In the end, I decided on broadcasting the labels using a
+combination of Pytorch's \texttt{unsqueeze} and \texttt{expand} methods.
+The steps I took are listed below:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  The 1D label tensor is converted to a 2D tensor by:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  initializing an empty 2D matrix of size (batch\_size,
+  number\_of\_classes)
+\item
+  one-hot-encoding the labels into the 2D matrix using the
+  \texttt{scatter\_} method
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  The 2D tensor is broadcasted into a 3D tensor by:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  unsqueezing it into a tensor of size {[}batch\_size,
+  number\_of\_classes, 1{]}
+\item
+  expanding it into a tensor of size {[}batch\_size,
+  number\_of\_classes, image\_size{]}, where image\_size is the height
+  dimension of the image data that we are trying to concatenate the
+  labels to.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  The 3D tensor is broadcasted into a 4D tensor by:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  unsqueezing it into a tensor of size {[}batch\_size,
+  number\_of\_classes, image\_size, 1{]}
+\item
+  expanding it into a tensor of size {[}batch\_size,
+  number\_of\_classes, image\_size, image\_size{]}, where the second
+  image\_size is the width dimension of the image data that we are
+  trying to concatenate the labels to. I used image\_size to signify
+  both the height and width variables since I am dealing with square
+  images.
+\end{itemize}
+
+The \texttt{expand\_labels} method is used in my GAN model to expand the
+1D label tensors to a 4D tensor of size {[}batch\_size,
+number\_of\_classes, 32, 32{]} when feeding into the discriminator, and
+a 4D tensor of size {[}batch\_size, number\_of\_classes, 1, 1{]} when
+feeding into the generator (since the generator's "input" is a noise
+vector of size {[}batch\_size, latent\_vector\_size, 1, 1{]}). The code
+snippet of the method is show below:
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{expand\PYZus{}labels}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{)}\PY{p}{:}
+        
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{    Function to broadcast 1D label tensor to 4D tensor.}
+        
+        \PY{l+s+sd}{    Inputs}
+        
+        \PY{l+s+sd}{        labels (ARR)}
+        \PY{l+s+sd}{            1D array of integer\PYZhy{}labels to be casted to a 4D tensor.}
+        
+        \PY{l+s+sd}{        batch\PYZus{}size (INT)}
+        \PY{l+s+sd}{            Batch size of the current dataset}
+        
+        \PY{l+s+sd}{        n\PYZus{}classes (INT)}
+        \PY{l+s+sd}{            Number of classes in the labels.}
+        
+        \PY{l+s+sd}{        img\PYZus{}size}
+        \PY{l+s+sd}{            The sizes of the 3rd and 4th dimension, which are assumed to be of equal size}
+        \PY{l+s+sd}{            since we are dealing with square images. The 2nd dimension is always the}
+        \PY{l+s+sd}{            number of classes.}
+        
+        \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+            \PY{c+c1}{\PYZsh{} convert labels to 2D for the scatter}
+            \PY{n}{y} \PY{o}{=} \PY{n}{labels}\PY{o}{.}\PY{n}{view}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} create one\PYZhy{}hot\PYZhy{}encoding buffer}
+            \PY{n}{y\PYZus{}onehot} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{FloatTensor}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} fill buffer with zeros}
+            \PY{n}{y\PYZus{}onehot}\PY{o}{.}\PY{n}{zero\PYZus{}}\PY{p}{(}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} fill buffer with 1 where index == label value}
+            \PY{n}{y\PYZus{}onehot}\PY{o}{.}\PY{n}{scatter\PYZus{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} cast 2D tensor to 3D}
+            \PY{n}{y\PYZus{}onehot}\PY{o}{.}\PY{n}{unsqueeze\PYZus{}}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} [batch\PYZus{}size, n\PYZus{}classes, 1]}
+            \PY{n}{y\PYZus{}onehot} \PY{o}{=} \PY{n}{y\PYZus{}onehot}\PY{o}{.}\PY{n}{expand}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} cast 3D tensor to 4D}
+            \PY{n}{y\PYZus{}onehot}\PY{o}{.}\PY{n}{unsqueeze\PYZus{}}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} [batch\PYZus{}size, n\PYZus{}classes, img\PYZus{}size, 1]}
+            \PY{n}{y\PYZus{}onehot} \PY{o}{=} \PY{n}{y\PYZus{}onehot}\PY{o}{.}\PY{n}{expand}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{y\PYZus{}onehot}
+\end{Verbatim}
+
+\newpage
+
+    \section{Data}\label{data}
+
+Two datasets were used to test the efficacy of the cDCGAN: the CIFAR10
+dataset and a custom dataset.\\
+
+The CIFAR10 dataset consisted of 10 classes: `airplane', `automobile',
+`bird', `cat', `deer', `dog', `frog', `horse', `ship', `truck'. 50,000
+images were used to train the cDCGAN, with an even distribution of 5,000
+images per class.\\
+
+The custom dataset consisted of 3 classes: cartoon, cyberpunk, and noir
+digital artwork. The digital art was scraped from
+https://www.artstation.com/. The classes have 9924, 9859, and 3567
+entries respectively.
+
+\section{Parameter Values}\label{parameter-values}
+
+Most parameters were set according to the Pytorch tutorial on building a
+DCGAN model. The following custom adjustments were also carried out:
+
+\begin{itemize}
+\item
+  The images were resized to (32, 32, 3) for faster computation, and the
+  feature map size for both the generator and the discriminator were
+  also set to 32.
+\item
+  The batch size was set to 128.
+\end{itemize}
+
+\section{Implementation}\label{implementation}
+
+The cDCGAN was trained for 30 epochs on the CIFAR10 dataset and 30
+epochs on the novel dataset. The parameters were kept the same across
+both training procedures, aside from the dataloaders.
+
+\subsection{Training Process}\label{training-process}
+
+The training process was carried out as follows:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Initiailize cDCGAN object with designated parameters.
+\item
+  Train for a set number of epochs. The model automatically saves
+  checkpoints at every 5 epochs, as well as after the last epoch.
+\item
+  If more training is desired, load model from last epoch to continue
+  training.
+\end{enumerate}
+
+\newpage
+\section{Results}\label{results}
+
+    \subsection{CIFAR10 Model Results}\label{cifar10-model-results}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}139}]:} \PY{n}{plot\PYZus{}gen\PYZus{}images}\PY{p}{(}\PY{n}{cifar\PYZus{}classes}\PY{p}{,} \PY{n}{cdcgan\PYZus{}cifar}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{conditional-DCGAN-pt-2_files/conditional-DCGAN-pt-2_5_0.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{conditional-DCGAN-pt-2_files/conditional-DCGAN-pt-2_5_1.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{conditional-DCGAN-pt-2_files/conditional-DCGAN-pt-2_5_2.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{conditional-DCGAN-pt-2_files/conditional-DCGAN-pt-2_5_3.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{conditional-DCGAN-pt-2_files/conditional-DCGAN-pt-2_5_4.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{conditional-DCGAN-pt-2_files/conditional-DCGAN-pt-2_5_5.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{conditional-DCGAN-pt-2_files/conditional-DCGAN-pt-2_5_6.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{conditional-DCGAN-pt-2_files/conditional-DCGAN-pt-2_5_7.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{conditional-DCGAN-pt-2_files/conditional-DCGAN-pt-2_5_8.png}
+    \end{center}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{conditional-DCGAN-pt-2_files/conditional-DCGAN-pt-2_5_9.png}
+    \end{center}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}125}]:} \PY{n}{plot\PYZus{}progression}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cDCGAN\PYZhy{}cifar/fake\PYZus{}images/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{horse}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fig\PYZus{}w} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{,} \PY{n}{fig\PYZus{}h} \PY{o}{=} \PY{l+m+mi}{40}\PY{p}{,} \PY{n}{nrows} \PY{o}{=}
+          \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{ncols} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{conditional-DCGAN-pt-2_files/conditional-DCGAN-pt-2_6_0.png}
+    \end{center}
+
+    \newpage
+    \subsubsection{Novel Dataset Model
+Results}\label{novel-dataset-model-results}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}140}]:} \PY{n}{plot\PYZus{}gen\PYZus{}images}\PY{p}{(}\PY{n}{dataset}\PY{o}{.}\PY{n}{classes}\PY{p}{,} \PY{n}{cdcgan}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{conditional-DCGAN-pt-2_files/conditional-DCGAN-pt-2_8_0.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{conditional-DCGAN-pt-2_files/conditional-DCGAN-pt-2_8_1.png}
+    \end{center}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{conditional-DCGAN-pt-2_files/conditional-DCGAN-pt-2_8_2.png}
+    \end{center}
+
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}131}]:} \PY{n}{plot\PYZus{}progression}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cDCGAN/fake\PYZus{}images/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cyberpunk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fig\PYZus{}w} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{,} \PY{n}{fig\PYZus{}h} \PY{o}{=} \PY{l+m+mi}{8}\PY{p}{,} \PY{n}{nrows} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,}
+          \PY{n}{ncols} \PY{o}{=} \PY{l+m+mi}{6}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{conditional-DCGAN-pt-2_files/conditional-DCGAN-pt-2_9_0.png}
+    \end{center}
+
+    
+    \section{Analysis and Summary}\label{analysis-and-summary}
+
+The results look significantly better for the CIFAR10 Model vs the Novel
+Dataset Model.\\
+
+In the CIFAR10 Model results, the horse class actually looks quite
+distinctly like horses. We also see that the car, ship, and truck
+classes have a stronger emphasis on the color red, which suggests that
+the network is picking up that red is commonly associated with these
+classes, but not with the other animal-based classes, which makes sense.\\
+
+For the Novel Dataset Model, the results look pretty bad. The image
+generation progression across epochs doesn't show any significantly
+development in the image generation, there appears to be significant
+mode collapse (the intraclass diversity is non-existent), and the
+interclass diversity is also non-existent.\\
+
+I'm not sure why the novel dataset model is performing so poorly vs the
+CIFAR10 model, since the same architecture is being used. There is
+either a slim chance that I accidentally hardcoded something that
+specifically suits the CIFAR10 model into the network, or perhaps
+something about the nature of the novel dataset that doesn't work well
+with embedding labels to the convolutional layers, e.g. small number of
+classes (3 vs 10), nature of the dataset (artwork is more similar across
+classes vs the CIFAR10 dataset).
+
+\section{Future Work}\label{future-work}
+
+\subsection{Increasing the amount of label attributes embedded into
+the
+data}\label{increasing-the-amount-of-label-attributes-embedded-into-the-data}
+
+In light of Wang, Dantcheva, and Bremond's (2018) experimental results
+which show that embedding a higher number of attributes leads to better
+IS and FID scores, I am wondering if I should find a way to assign
+further attributes to my novel dataset, e.g. dark/bright,
+character/landscape, to be embedded into the model. My main concern is
+that I am already quite confused as to how a single label (in this case,
+artwork genre) is being sensibly broadcasted into a 4D shape in a way
+that represents the label information accurately, and so adding even
+more labels will convolute my conceptual understanding of this
+representation even further. However, I suppose this can be overcome
+through further research and experimentation.
+
+\subsection{Studying and Replicating
+ArtGAN}\label{studying-and-replicating-artgan}
+
+While conducting my literature review, I found a paper written by Tan,
+Chan, Aguirre, and Tanaka (2018), which specifically implements a
+conditional GAN for creating artwork based on genres, artists, styles,
+etc. Their results were very interesting and appear to be highly
+relevant to my Capstone project of creating artwork based on their
+assigned movie genre (cyberpunk, noir, cartoon, etc.).
+
+The authors used a few methods that apparently improved on existing
+conditional GAN architectures thus far:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Categorical autoencoder-based discriminator.} The authors
+  incorporated an autoencoder into the categorical discriminator in
+  their ArtGAN model as a source of additional complementary information
+  for the model. The justification provided was as follows:
+\end{itemize}
+
+"The core idea of using an autoencoder in the discriminator is that
+reconstruction-based output offers diverse targets, which produce a very
+different gradient directions within the minibatch. Conceptually, this
+improves the efficiency and effectiveness when training a GAN model"
+(Tan, Chan, Aguirre, \& Tanaka, 2018).
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Improving generated image quality by upsampling then
+  downsampling generated images.} The authors first upsample the
+  generated images so that they were of higher resolution than the real
+  dataset, e.g. (64, 64), then using a pooling method to downsample the
+  images by an appropriate factor, e.g. downsample by factor of 2 to get
+  images of size (32, 32) again. The pooling method used by the authors
+  was overlapped average pooling, which "discourages the generator from
+  blindly computes the same pixel value within the same pooling block"
+  (Tan, et al., 2018). The authors found that using the Image Quality
+  (IQ) strategy often resulted in higher-quality images, and deduced
+  that "richer representation{[}s{]} can be learned with higher feature
+  dimension."
+\end{itemize}
+
+\paragraph{ArtGAN Results}\label{artgan-results}
+
+The generated images from the ArtGAN look quite promising, as the model
+appears to be able to create distinct artwork based on either a given
+genre, artist, or style. In this case, genre refers to landscape,
+portrait, abstract, etc. while style refers to Rococco, Ukiyo-e,
+Renaissance, etc. The authors found that the model performed best
+(created the most class-distinctive artwork) when differentiating art
+genres (probably due to the distinct different in subject vs object in
+the images), but performed worse on art styles due to the high overlap
+between various styles.
+
+      \begin{center}
+    \adjustimage{max size={1.0\linewidth}{0.9\paperheight}}{report-figures/artgan-genre.png}
+    \end{center}
+    
+          \begin{center}
+    \adjustimage{max size={1.0\linewidth}{0.9\paperheight}}{report-figures/artgan-artist.png}
+    \end{center}
+    
+          \begin{center}
+    \adjustimage{max size={1.0\linewidth}{0.9\paperheight}}{report-figures/artgan-style.png}
+    \end{center}
+
+\paragraph{Single Label vs Multiple
+Labels}\label{single-label-vs-multiple-labels}
+
+As opposed to Wang, Dantcheva, and Bremond (2018), Tan et al. (2018) did
+not feed multiple labels simultaneously into their model, but instead
+trained a seperate model for each label feature, e.g. genre, artist, or
+style. While Wang, Dantcheva, and Bremond's results would suggest that
+the inclusion of all the labels in one run of the model would increase
+the amount of information being fed into the model, and so improve the
+model performance, it is difficult to say whether this would translate
+well to the domain of artwork.
+
+\newpage
+    \section*{Code}\label{code}
+
+    \subsection{Import Libraries}\label{import-libraries}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k}{import} \PY{n}{print\PYZus{}function}
+        \PY{c+c1}{\PYZsh{}\PYZpc{}matplotlib inline}
+        \PY{k+kn}{import} \PY{n+nn}{argparse}
+        \PY{k+kn}{import} \PY{n+nn}{os}
+        \PY{k+kn}{import} \PY{n+nn}{random}
+        \PY{k+kn}{import} \PY{n+nn}{torch}
+        \PY{k+kn}{import} \PY{n+nn}{torch}\PY{n+nn}{.}\PY{n+nn}{nn} \PY{k}{as} \PY{n+nn}{nn}
+        \PY{k+kn}{import} \PY{n+nn}{torch}\PY{n+nn}{.}\PY{n+nn}{nn}\PY{n+nn}{.}\PY{n+nn}{parallel}
+        \PY{k+kn}{import} \PY{n+nn}{torch}\PY{n+nn}{.}\PY{n+nn}{backends}\PY{n+nn}{.}\PY{n+nn}{cudnn} \PY{k}{as} \PY{n+nn}{cudnn}
+        \PY{k+kn}{import} \PY{n+nn}{torch}\PY{n+nn}{.}\PY{n+nn}{optim} \PY{k}{as} \PY{n+nn}{optim}
+        \PY{k+kn}{import} \PY{n+nn}{torch}\PY{n+nn}{.}\PY{n+nn}{utils}\PY{n+nn}{.}\PY{n+nn}{data}
+        \PY{k+kn}{import} \PY{n+nn}{torchvision}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k}{as} \PY{n+nn}{dset}
+        \PY{k+kn}{import} \PY{n+nn}{torchvision}\PY{n+nn}{.}\PY{n+nn}{transforms} \PY{k}{as} \PY{n+nn}{transforms}
+        \PY{k+kn}{import} \PY{n+nn}{torchvision}\PY{n+nn}{.}\PY{n+nn}{utils} \PY{k}{as} \PY{n+nn}{vutils}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{image} \PY{k}{as} \PY{n+nn}{mpimg}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{gridspec} \PY{k}{as} \PY{n+nn}{gridspec}
+        \PY{k+kn}{from} \PY{n+nn}{torchsummary} \PY{k}{import} \PY{n}{summary}
+        \PY{k+kn}{from} \PY{n+nn}{torchvision}\PY{n+nn}{.}\PY{n+nn}{utils} \PY{k}{import} \PY{n}{save\PYZus{}image}
+        \PY{k+kn}{import} \PY{n+nn}{torchvision}
+        
+        \PY{c+c1}{\PYZsh{} Set random seed for reproducibility}
+        \PY{n}{manualSeed} \PY{o}{=} \PY{l+m+mi}{999}
+        \PY{c+c1}{\PYZsh{}manualSeed = random.randint(1, 10000) \PYZsh{} use if you want new results}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Random Seed: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{manualSeed}\PY{p}{)}
+        \PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{manualSeed}\PY{p}{)}
+        \PY{n}{torch}\PY{o}{.}\PY{n}{manual\PYZus{}seed}\PY{p}{(}\PY{n}{manualSeed}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Random Seed:  999
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} <torch.\_C.Generator at 0x108b7a170>
+\end{Verbatim}
+            
+    \subsection{Set Parameter Values}\label{set-parameter-values}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Root directory for dataset}
+        \PY{n}{dataroot} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{images}\PY{l+s+s1}{\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} Number of workers for dataloader}
+        \PY{n}{workers} \PY{o}{=} \PY{l+m+mi}{2}
+        
+        \PY{c+c1}{\PYZsh{} Batch size during training}
+        \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{128}
+        
+        \PY{c+c1}{\PYZsh{} Spatial size of training images. All images will be resized to this size using a}
+        \PY{n}{transformer}\PY{o}{.}
+        \PY{n}{image\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{32}
+        
+        \PY{c+c1}{\PYZsh{} Number of channels in the training images. For color images this is 3}
+        \PY{n}{nc} \PY{o}{=} \PY{l+m+mi}{3}
+        
+        \PY{c+c1}{\PYZsh{} Size of z latent vector (i.e. size of generator input)}
+        \PY{n}{nz} \PY{o}{=} \PY{l+m+mi}{100}
+        
+        \PY{c+c1}{\PYZsh{} Size of feature maps in generator}
+        \PY{n}{ngf} \PY{o}{=} \PY{l+m+mi}{32}
+        
+        \PY{c+c1}{\PYZsh{} Size of feature maps in discriminator}
+        \PY{n}{ndf} \PY{o}{=} \PY{l+m+mi}{32}
+        
+        \PY{c+c1}{\PYZsh{} Learning rate for optimizers}
+        \PY{n}{lr} \PY{o}{=} \PY{l+m+mf}{0.0002}
+        
+        \PY{c+c1}{\PYZsh{} Beta1 hyperparam for Adam optimizers}
+        \PY{n}{beta1} \PY{o}{=} \PY{l+m+mf}{0.5}
+        
+        \PY{c+c1}{\PYZsh{} Number of GPUs available. Use 0 for CPU mode.}
+        \PY{n}{ngpu} \PY{o}{=} \PY{l+m+mi}{1}
+        
+        \PY{c+c1}{\PYZsh{} Decide which device we want to run on}
+        \PY{n}{device} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{device}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cuda:0}\PY{l+s+s2}{\PYZdq{}} \PY{k}{if} \PY{p}{(}\PY{n}{torch}\PY{o}{.}\PY{n}{cuda}\PY{o}{.}\PY{n}{is\PYZus{}available}\PY{p}{(}\PY{p}{)} \PY{o+ow}{and} \PY{n}{ngpu} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{)} \PY{k}{else} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cpu}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \subsection{Import Data}\label{import-data}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}images}\PY{p}{(}\PY{n}{dataloader}\PY{p}{,} \PY{n}{classes}\PY{p}{,} \PY{n}{image\PYZus{}number} \PY{o}{=} \PY{l+m+mi}{8}\PY{p}{,} \PY{n}{model} \PY{o}{=} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+        
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{    Function to plot a sample of images from the dataloader, alongside their class}
+        \PY{l+s+sd}{labels.}
+        \PY{l+s+sd}{    If a model is assigned to the model parameter, the predicted labels will be printed}
+        \PY{l+s+sd}{as well.}
+        
+        \PY{l+s+sd}{    Input:}
+        \PY{l+s+sd}{        dataloader (DATALOADER)}
+        \PY{l+s+sd}{            Dataloader of dataset.}
+        
+        \PY{l+s+sd}{        classes (ARR)}
+        \PY{l+s+sd}{            Array type object containing the class labels (strings) in the order that}
+        \PY{l+s+sd}{            corresponds with the numerical key in the dataloader.}
+        
+        \PY{l+s+sd}{        image\PYZus{}number (INT)}
+        \PY{l+s+sd}{            Number of images to plot from the dataloader. image\PYZus{}number should not exceed}
+        \PY{l+s+sd}{batch size.}
+        \PY{l+s+sd}{            Since images are plotted in a row, any number \PYZgt{} 10 could cause display}
+        \PY{l+s+sd}{issues.}
+        \PY{l+s+sd}{            Default: 8.}
+        
+        \PY{l+s+sd}{        model (PYTORCH MODEL)}
+        \PY{l+s+sd}{            Optional parameter. If a model is provided, the predicted labels from the}
+        \PY{l+s+sd}{            model for each of the images will be printed as well.}
+        \PY{l+s+sd}{            Default: None.}
+        \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+            \PY{c+c1}{\PYZsh{} get images and true labels}
+            \PY{n}{images}\PY{p}{,} \PY{n}{labels} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n+nb}{iter}\PY{p}{(}\PY{n}{dataloader}\PY{p}{)}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} plot images}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{off}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{n}{vutils}\PY{o}{.}\PY{n}{make\PYZus{}grid}\PY{p}{(}\PY{n}{images}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{n}{image\PYZus{}number}\PY{p}{]}\PY{p}{,}
+        \PY{n}{padding}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{normalize}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{o}{.}\PY{n}{cpu}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} print true labels}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{True labels: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{     }\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}5s}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{classes}\PY{p}{[}\PY{n}{labels}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{]} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in}
+        \PY{n+nb}{range}\PY{p}{(}\PY{n}{image\PYZus{}number}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+            \PY{k}{if} \PY{n}{model}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} predict image classes using custom net}
+                \PY{n}{outputs} \PY{o}{=} \PY{n}{model}\PY{p}{(}\PY{n}{images}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} the outputs are energies for the 10 classes.}
+                \PY{c+c1}{\PYZsh{} the higher the energy for a class, the more the network thinks that the image}
+        \PY{o+ow}{is} \PY{n}{of} \PY{n}{the} \PY{n}{particular} \PY{n}{class}\PY{o}{.}
+                \PY{c+c1}{\PYZsh{} So, we get the index of the highest energy:}
+                \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{predicted} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{outputs}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} print predicted labels}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Predicted:  }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{   }\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}5s}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{classes}\PY{p}{[}\PY{n}{predicted}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{]} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in}
+        \PY{n+nb}{range}\PY{p}{(}\PY{n}{image\PYZus{}number}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}target\PYZus{}index}\PY{p}{(}\PY{n}{dataset}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{    Given a dataset, this function returns a dictionary of classes, where the value of}
+        \PY{l+s+sd}{each class}
+        \PY{l+s+sd}{    is a dictionary containing the class indices and the number of datapoints in the}
+        \PY{l+s+sd}{class.}
+        
+        \PY{l+s+sd}{    Input:}
+        \PY{l+s+sd}{        dataset (IMAGEFOLDER)}
+        \PY{l+s+sd}{            Dataset should be ImageFolder class.}
+        
+        \PY{l+s+sd}{    Output:}
+        \PY{l+s+sd}{        idx\PYZus{}dct (DCT)}
+        \PY{l+s+sd}{            Nested dictionary with the class name as key, and a dictionary containing}
+        \PY{l+s+sd}{the}
+        \PY{l+s+sd}{            \PYZsq{}indices\PYZsq{} and \PYZsq{}length\PYZsq{} of the class as values.}
+        \PY{l+s+sd}{            Example format:}
+        \PY{l+s+sd}{            idx\PYZus{}dct = \PYZob{} \PYZsq{}class\PYZus{}A\PYZsq{}:\PYZob{}}
+        \PY{l+s+sd}{                        \PYZsq{}indices\PYZsq{}: [1,2,3,4,5],}
+        \PY{l+s+sd}{                        \PYZsq{}length\PYZsq{}: 5}
+        \PY{l+s+sd}{                        \PYZcb{},}
+        \PY{l+s+sd}{                        \PYZsq{}class\PYZus{}B\PYZsq{}:\PYZob{}}
+        \PY{l+s+sd}{                        \PYZsq{}indices\PYZsq{}: [6,7,8],}
+        \PY{l+s+sd}{                        \PYZsq{}length\PYZsq{}: 3}
+        \PY{l+s+sd}{                        \PYZcb{},}
+        \PY{l+s+sd}{                        \PYZsq{}class\PYZus{}C\PYZsq{}:\PYZob{}}
+        \PY{l+s+sd}{                        \PYZsq{}indices\PYZsq{}: [100,101,102,103],}
+        \PY{l+s+sd}{                        \PYZsq{}length\PYZsq{}: 4}
+        \PY{l+s+sd}{                        \PYZcb{}\PYZcb{}}
+        \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+            \PY{n}{targets} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{tensor}\PY{p}{(}\PY{p}{[}\PY{n}{t}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{dataset}\PY{o}{.}\PY{n}{samples}\PY{p}{]}\PY{p}{)}
+            \PY{n}{idx\PYZus{}dct} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+        
+            \PY{k}{for} \PY{n}{k}\PY{p}{,}\PY{n}{v} \PY{o+ow}{in} \PY{n}{dataset}\PY{o}{.}\PY{n}{class\PYZus{}to\PYZus{}idx}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                \PY{n}{idx\PYZus{}dct}\PY{p}{[}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{indices}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{(}\PY{n}{targets} \PY{o}{==} \PY{n}{v}\PY{p}{)}\PY{o}{.}\PY{n}{nonzero}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{\PYZcb{}}
+                \PY{n}{idx\PYZus{}dct}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{idx\PYZus{}dct}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{indices}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{idx\PYZus{}dct}
+        
+        
+        \PY{k}{def} \PY{n+nf}{plot\PYZus{}batch}\PY{p}{(}\PY{n}{dataloader}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{    Plot images from a dataloader}
+        \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+            \PY{n}{real\PYZus{}batch} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n+nb}{iter}\PY{p}{(}\PY{n}{dataloader}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{off}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{n}{vutils}\PY{o}{.}\PY{n}{make\PYZus{}grid}\PY{p}{(}\PY{n}{real\PYZus{}batch}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{64}\PY{p}{]}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,}
+        \PY{n}{normalize}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{o}{.}\PY{n}{cpu}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \subsection{CIFAR10 Dataset}\label{cifar10-dataset}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} transform images to tensor and normalize}
+        \PY{n}{transform} \PY{o}{=} \PY{n}{transforms}\PY{o}{.}\PY{n}{Compose}\PY{p}{(}
+            \PY{p}{[}\PY{n}{transforms}\PY{o}{.}\PY{n}{ToTensor}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+             \PY{n}{transforms}\PY{o}{.}\PY{n}{Normalize}\PY{p}{(}\PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} create dataloaders}
+        \PY{n}{trainset} \PY{o}{=} \PY{n}{torchvision}\PY{o}{.}\PY{n}{datasets}\PY{o}{.}\PY{n}{CIFAR10}\PY{p}{(}\PY{n}{root}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{train}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                                                \PY{n}{download}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{transform}\PY{o}{=}\PY{n}{transform}\PY{p}{)}
+        \PY{n}{trainloader} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{DataLoader}\PY{p}{(}\PY{n}{trainset}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{batch\PYZus{}size}\PY{p}{,}
+                                                  \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{num\PYZus{}workers}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+        
+        \PY{n}{cifar\PYZus{}classes} \PY{o}{=} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{plane}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{car}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bird}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{deer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{frog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{horse}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ship}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{truck}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} plot sample of images}
+        \PY{n}{plot\PYZus{}images}\PY{p}{(}\PY{n}{trainloader}\PY{p}{,} \PY{n}{cifar\PYZus{}classes}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Files already downloaded and verified
+True labels:   deer      deer       cat      deer      deer     horse       dog
+frog
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{conditional-DCGAN-pt-2_files/conditional-DCGAN-pt-2_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Novel Dataset}\label{novel-dataset}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Create the dataset}
+        \PY{n}{dataset} \PY{o}{=} \PY{n}{dset}\PY{o}{.}\PY{n}{ImageFolder}\PY{p}{(}\PY{n}{root}\PY{o}{=}\PY{n}{dataroot}\PY{p}{,}
+                                   \PY{n}{transform}\PY{o}{=}\PY{n}{transforms}\PY{o}{.}\PY{n}{Compose}\PY{p}{(}\PY{p}{[}
+                                   \PY{n}{transforms}\PY{o}{.}\PY{n}{Resize}\PY{p}{(}\PY{n}{image\PYZus{}size}\PY{p}{)}\PY{p}{,}
+                                   \PY{n}{transforms}\PY{o}{.}\PY{n}{CenterCrop}\PY{p}{(}\PY{n}{image\PYZus{}size}\PY{p}{)}\PY{p}{,}
+                                   \PY{n}{transforms}\PY{o}{.}\PY{n}{RandomHorizontalFlip}\PY{p}{(}\PY{n}{p}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,}
+                                   \PY{n}{transforms}\PY{o}{.}\PY{n}{ToTensor}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                                   \PY{n}{transforms}\PY{o}{.}\PY{n}{Normalize}\PY{p}{(}\PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                                   \PY{p}{]}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{target\PYZus{}idx\PYZus{}dct} \PY{o}{=} \PY{n}{get\PYZus{}target\PYZus{}index}\PY{p}{(}\PY{n}{dataset}\PY{p}{)}
+        \PY{k}{for} \PY{n}{k}\PY{p}{,}\PY{n}{v} \PY{o+ow}{in} \PY{n}{target\PYZus{}idx\PYZus{}dct}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Class }\PY{l+s+si}{\PYZob{}k\PYZcb{}}\PY{l+s+s2}{ has }\PY{l+s+si}{\PYZob{}v[\PYZsq{}length\PYZsq{}]\PYZcb{}}\PY{l+s+s2}{ entries.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{n}{dataloader} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{DataLoader}\PY{p}{(}\PY{n}{dataset}\PY{p}{,} \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{shuffle} \PY{o}{=}
+        \PY{k+kc}{True}\PY{p}{)}
+        
+        \PY{n}{plot\PYZus{}images}\PY{p}{(}\PY{n}{dataloader}\PY{p}{,} \PY{n}{dataset}\PY{o}{.}\PY{n}{classes}\PY{p}{,} \PY{n}{image\PYZus{}number} \PY{o}{=} \PY{l+m+mi}{8}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Class cartoon has 9924 entries.
+Class cyberpunk has 9859 entries.
+Class noir has 3567 entries.
+True labels:  cyberpunk     cyberpunk     cyberpunk     cartoon     cartoon
+cartoon     cartoon     cyberpunk
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{conditional-DCGAN-pt-2_files/conditional-DCGAN-pt-2_21_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{cDCGAN Model}\label{cdcgan-model}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{def} \PY{n+nf}{weights\PYZus{}init}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{    Custom weights initialization called on netG and netD}
+        \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+            \PY{n}{classname} \PY{o}{=} \PY{n}{m}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}class\PYZus{}\PYZus{}}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}
+        
+            \PY{k}{if} \PY{n}{classname}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Conv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{!=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}
+                \PY{n}{nn}\PY{o}{.}\PY{n}{init}\PY{o}{.}\PY{n}{normal\PYZus{}}\PY{p}{(}\PY{n}{m}\PY{o}{.}\PY{n}{weight}\PY{o}{.}\PY{n}{data}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{0.02}\PY{p}{)}
+        
+            \PY{k}{elif} \PY{n}{classname}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BatchNorm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{!=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}
+                \PY{n}{nn}\PY{o}{.}\PY{n}{init}\PY{o}{.}\PY{n}{normal\PYZus{}}\PY{p}{(}\PY{n}{m}\PY{o}{.}\PY{n}{weight}\PY{o}{.}\PY{n}{data}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{0.02}\PY{p}{)}
+                \PY{n}{nn}\PY{o}{.}\PY{n}{init}\PY{o}{.}\PY{n}{constant\PYZus{}}\PY{p}{(}\PY{n}{m}\PY{o}{.}\PY{n}{bias}\PY{o}{.}\PY{n}{data}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{k}{class} \PY{n+nc}{cDiscriminator}\PY{p}{(}\PY{n}{nn}\PY{o}{.}\PY{n}{Module}\PY{p}{)}\PY{p}{:}
+         
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{ngpu}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{n+nb}{super}\PY{p}{(}\PY{n}{cDiscriminator}\PY{p}{,} \PY{n+nb+bp}{self}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{p}{)}
+         
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ngpu} \PY{o}{=} \PY{n}{ngpu}
+         
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{image\PYZus{}conv} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Sequential}\PY{p}{(}
+                     \PY{c+c1}{\PYZsh{} input is (nc) x 64 x 64}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{Conv2d}\PY{p}{(}\PY{n}{nc}\PY{p}{,} \PY{l+m+mi}{32}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{bias}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{,}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{LeakyReLU}\PY{p}{(}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{,}
+                 \PY{p}{)}
+         
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{label\PYZus{}conv} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Sequential}\PY{p}{(}
+                     \PY{c+c1}{\PYZsh{} input is (nc) x 64 x 64}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{Conv2d}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{l+m+mi}{32}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{bias}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{,}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{LeakyReLU}\PY{p}{(}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{,}
+                 \PY{p}{)}
+         
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{main} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Sequential}\PY{p}{(}
+         
+                     \PY{c+c1}{\PYZsh{} state size. (ndf) x 32 x 32}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{Conv2d}\PY{p}{(}\PY{n}{ndf}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{ndf}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{bias}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{,}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{BatchNorm2d}\PY{p}{(}\PY{n}{ndf}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{LeakyReLU}\PY{p}{(}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{,}
+         
+                     \PY{c+c1}{\PYZsh{} state size. (ndf*2) x 16 x 16}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{Conv2d}\PY{p}{(}\PY{n}{ndf} \PY{o}{*} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{ndf} \PY{o}{*} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{bias}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{,}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{BatchNorm2d}\PY{p}{(}\PY{n}{ndf} \PY{o}{*} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{LeakyReLU}\PY{p}{(}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{,}
+         
+                     \PY{c+c1}{\PYZsh{} state size. (ndf*4) x 8 x 8}
+                     \PY{c+c1}{\PYZsh{} nn.Conv2d(ndf * 4, ndf * 8, 4, 2, 1, bias=False),}
+                     \PY{c+c1}{\PYZsh{} nn.BatchNorm2d(ndf * 8),}
+                     \PY{c+c1}{\PYZsh{} nn.LeakyReLU(0.2, inplace=True),}
+         
+                     \PY{c+c1}{\PYZsh{} state size. (ndf*8) x 4 x 4}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{Conv2d}\PY{p}{(}\PY{n}{ndf} \PY{o}{*} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{bias}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{,}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{Sigmoid}\PY{p}{(}\PY{p}{)}
+                 \PY{p}{)}
+         
+         
+             \PY{k}{def} \PY{n+nf}{forward}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n+nb}{input}\PY{p}{,} \PY{n}{labels}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{image\PYZus{}conv}\PY{p}{(}\PY{n+nb}{input}\PY{p}{)}
+         
+                 \PY{n}{y} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{label\PYZus{}conv}\PY{p}{(}\PY{n}{labels}\PY{p}{)}
+         
+                 \PY{n}{x} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{cat}\PY{p}{(}\PY{p}{[}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{main}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         
+                 \PY{k}{return} \PY{n}{x}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{} Original Generator Code}
+         \PY{c+c1}{\PYZsh{} I ended up not using this in the model as I found it challenging to debug.}
+         \PY{c+c1}{\PYZsh{} In the final model, this set of code should be used.}
+         
+         \PY{k}{class} \PY{n+nc}{cGenerator}\PY{p}{(}\PY{n}{nn}\PY{o}{.}\PY{n}{Module}\PY{p}{)}\PY{p}{:}
+         
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{ngpu}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{n+nb}{super}\PY{p}{(}\PY{n}{cGenerator}\PY{p}{,} \PY{n+nb+bp}{self}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{p}{)}
+         
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ngpu} \PY{o}{=} \PY{n}{ngpu}
+         
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{image\PYZus{}deconv} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Sequential}\PY{p}{(}
+                     \PY{c+c1}{\PYZsh{} input is Z going into a convolution}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{ConvTranspose2d}\PY{p}{(}\PY{n}{nz}\PY{p}{,} \PY{n}{ngf} \PY{o}{*} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{bias}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{,}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{BatchNorm2d}\PY{p}{(}\PY{n}{ngf} \PY{o}{*} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{ReLU}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+                 \PY{p}{)}
+         
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{label\PYZus{}deconv} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Sequential}\PY{p}{(}
+                     \PY{c+c1}{\PYZsh{} input is labels going into a convolution}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{ConvTranspose2d}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{ngf} \PY{o}{*} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{bias}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{,}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{BatchNorm2d}\PY{p}{(}\PY{n}{ngf} \PY{o}{*} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{ReLU}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+                 \PY{p}{)}
+         
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{main} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Sequential}\PY{p}{(}
+         
+                     \PY{c+c1}{\PYZsh{} state size. (ngf*8) x 4 x 4}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{ConvTranspose2d}\PY{p}{(}\PY{n}{ngf} \PY{o}{*} \PY{l+m+mi}{16}\PY{p}{,} \PY{n}{ngf} \PY{o}{*} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{bias}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{,}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{BatchNorm2d}\PY{p}{(}\PY{n}{ngf} \PY{o}{*} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{ReLU}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}\PY{p}{,}
+         
+                     \PY{c+c1}{\PYZsh{} state size. (ngf*4) x 8 x 8}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{ConvTranspose2d}\PY{p}{(}\PY{n}{ngf} \PY{o}{*} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{ngf}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{bias}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{,}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{BatchNorm2d}\PY{p}{(}\PY{n}{ngf}\PY{p}{)}\PY{p}{,}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{ReLU}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}\PY{p}{,}
+         
+                     \PY{c+c1}{\PYZsh{} state size. (ngf) x 32 x 32}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{ConvTranspose2d}\PY{p}{(}\PY{n}{ngf}\PY{p}{,} \PY{n}{nc}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{bias}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{,}
+                     \PY{n}{nn}\PY{o}{.}\PY{n}{Tanh}\PY{p}{(}\PY{p}{)}
+                 \PY{p}{)}
+         
+         
+             \PY{k}{def} \PY{n+nf}{forward}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n+nb}{input}\PY{p}{,} \PY{n}{labels}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{c+c1}{\PYZsh{} deconvolve image}
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{image\PYZus{}deconv}\PY{p}{(}\PY{n+nb}{input}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} deconvolve labels}
+                 \PY{n}{y} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{label\PYZus{}deconv}\PY{p}{(}\PY{n}{labels}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} concatenate deconvolved image and labels}
+                 \PY{n}{x} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{cat}\PY{p}{(}\PY{p}{[}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} feed image\PYZhy{}with\PYZhy{}label\PYZhy{}embedding into main network layers}
+                 \PY{n}{gen\PYZus{}img} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{main}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         
+                 \PY{k}{return} \PY{n}{gen\PYZus{}img}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}101}]:} \PY{k+kn}{import} \PY{n+nn}{torch}\PY{n+nn}{.}\PY{n+nn}{nn}\PY{n+nn}{.}\PY{n+nn}{functional} \PY{k}{as} \PY{n+nn}{F}
+          
+          \PY{c+c1}{\PYZsh{} New Generator Code}
+          \PY{c+c1}{\PYZsh{} This was the generator code I referenced from Kang\PYZsq{}s repo:}
+          \PY{n}{https}\PY{p}{:}\PY{o}{/}\PY{o}{/}\PY{n}{github}\PY{o}{.}\PY{n}{com}\PY{o}{/}\PY{n}{znxlwm}\PY{o}{/}\PY{n}{pytorch}\PY{o}{\PYZhy{}}\PY{n}{MNIST}\PY{o}{\PYZhy{}}\PY{n}{CelebA}\PY{o}{\PYZhy{}}\PY{n}{cGAN}\PY{o}{\PYZhy{}}\PY{n}{cDCGAN}
+          \PY{c+c1}{\PYZsh{} I modified it to suit my dataset (image size, number of classes, etc.)}
+          \PY{c+c1}{\PYZsh{} I ended up using this in my model since it was easier to debug (could print x after}
+          \PY{n}{every} \PY{n}{layer}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} However, in the final model, I would want to use my own generator code (above) as I}
+          \PY{n}{think} \PY{n}{it} \PY{o+ow}{is} \PY{n}{a} \PY{n}{bit} \PY{n}{neater}
+          \PY{c+c1}{\PYZsh{} and easier to understand since it clearly seperates the image\PYZhy{}deconvolution and label\PYZhy{}}
+          \PY{n}{deconvolution} \PY{n}{layers}
+          \PY{c+c1}{\PYZsh{} into seperate parts before concatenating together and feeding into the main}
+          \PY{n}{deconvolutional} \PY{n}{layers}\PY{o}{.}
+          
+          \PY{k}{class} \PY{n+nc}{cGenerator}\PY{p}{(}\PY{n}{nn}\PY{o}{.}\PY{n}{Module}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{} initializers}
+              \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{ngpu}\PY{p}{)}\PY{p}{:}
+                  \PY{n+nb}{super}\PY{p}{(}\PY{n}{cGenerator}\PY{p}{,} \PY{n+nb+bp}{self}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{deconv1\PYZus{}1} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{ConvTranspose2d}\PY{p}{(}\PY{n}{nz}\PY{p}{,} \PY{n}{ngf}\PY{o}{*}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{deconv1\PYZus{}1\PYZus{}bn} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{BatchNorm2d}\PY{p}{(}\PY{n}{ngf}\PY{o}{*}\PY{l+m+mi}{8}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{deconv1\PYZus{}2} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{ConvTranspose2d}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{ngf}\PY{o}{*}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{deconv1\PYZus{}2\PYZus{}bn} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{BatchNorm2d}\PY{p}{(}\PY{n}{ngf}\PY{o}{*}\PY{l+m+mi}{8}\PY{p}{)}
+          
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{deconv2} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{ConvTranspose2d}\PY{p}{(}\PY{n}{ngf}\PY{o}{*}\PY{l+m+mi}{16}\PY{p}{,} \PY{n}{ngf}\PY{o}{*}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{deconv2\PYZus{}bn} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{BatchNorm2d}\PY{p}{(}\PY{n}{ngf}\PY{o}{*}\PY{l+m+mi}{4}\PY{p}{)}
+          
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{deconv3} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{ConvTranspose2d}\PY{p}{(}\PY{n}{ngf}\PY{o}{*}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{ngf}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{deconv3\PYZus{}bn} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{BatchNorm2d}\PY{p}{(}\PY{n}{ngf}\PY{p}{)}
+          
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{deconv4} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{ConvTranspose2d}\PY{p}{(}\PY{n}{ngf}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+          
+              \PY{c+c1}{\PYZsh{} forward method}
+              \PY{c+c1}{\PYZsh{} def forward(self, input):}
+              \PY{k}{def} \PY{n+nf}{forward}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n+nb}{input}\PY{p}{,} \PY{n}{label}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{x} \PY{o}{=} \PY{n}{F}\PY{o}{.}\PY{n}{leaky\PYZus{}relu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{deconv1\PYZus{}1\PYZus{}bn}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{deconv1\PYZus{}1}\PY{p}{(}\PY{n+nb}{input}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{)}
+                  \PY{n}{y} \PY{o}{=} \PY{n}{F}\PY{o}{.}\PY{n}{leaky\PYZus{}relu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{deconv1\PYZus{}2\PYZus{}bn}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{deconv1\PYZus{}2}\PY{p}{(}\PY{n}{label}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{)}
+                  \PY{n}{x} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{cat}\PY{p}{(}\PY{p}{[}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+                  \PY{n}{x} \PY{o}{=} \PY{n}{F}\PY{o}{.}\PY{n}{leaky\PYZus{}relu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{deconv2\PYZus{}bn}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{deconv2}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{)}
+                  \PY{n}{x} \PY{o}{=} \PY{n}{F}\PY{o}{.}\PY{n}{leaky\PYZus{}relu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{deconv3\PYZus{}bn}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{deconv3}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{)}
+                  \PY{n}{x} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{tanh}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{deconv4}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+          
+                  \PY{k}{return} \PY{n}{x}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}102}]:} \PY{k}{class} \PY{n+nc}{cDCGAN}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+          
+              \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{    Conditional DCGAN class.}
+          \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+          
+              \PY{k}{def} \PY{n+nf}{\PYZus{}checkDirectory}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{dirName}\PY{p}{)}\PY{p}{:}
+          
+                  \PY{k}{if} \PY{o+ow}{not} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{exists}\PY{p}{(}\PY{n}{dirName}\PY{p}{)}\PY{p}{:}
+                      \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}dirName\PYZcb{}}\PY{l+s+s2}{ directory does not exist. Making }\PY{l+s+si}{\PYZob{}dirName\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                      \PY{n}{os}\PY{o}{.}\PY{n}{makedirs}\PY{p}{(}\PY{n}{dirName}\PY{p}{)}
+          
+                  \PY{k}{else}\PY{p}{:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}dirName\PYZcb{}}\PY{l+s+s2}{ directory exists.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          
+              \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{dataloader}\PY{p}{,} \PY{n}{classes}\PY{p}{,} \PY{n}{save\PYZus{}dir}\PY{p}{,} \PY{n}{num\PYZus{}epochs}\PY{p}{,}
+                           \PY{n}{criterion}\PY{p}{,} \PY{n}{netD}\PY{p}{,} \PY{n}{netG}\PY{p}{,} \PY{n}{optimizerD}\PY{p}{,} \PY{n}{optimizerG}\PY{p}{,} \PY{n}{device}\PY{p}{)}\PY{p}{:}
+          
+                  \PY{c+c1}{\PYZsh{} data parameters}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dataloader} \PY{o}{=} \PY{n}{dataloader}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{classes} \PY{o}{=} \PY{n}{classes} \PY{c+c1}{\PYZsh{} class labels}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n\PYZus{}classes} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{classes}\PY{p}{)} \PY{c+c1}{\PYZsh{} number of classes}
+          
+                  \PY{c+c1}{\PYZsh{} save file locations}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}checkDirectory}\PY{p}{(}\PY{n}{save\PYZus{}dir}\PY{p}{)} \PY{c+c1}{\PYZsh{} check whether save dir exists}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{checkpoint\PYZus{}dir} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{save\PYZus{}dir}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{checkpoints}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}checkDirectory}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{checkpoint\PYZus{}dir}\PY{p}{)} \PY{c+c1}{\PYZsh{} create checkpoints dir}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fake\PYZus{}image\PYZus{}dir} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{save\PYZus{}dir}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fake\PYZus{}images}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}checkDirectory}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fake\PYZus{}image\PYZus{}dir}\PY{p}{)} \PY{c+c1}{\PYZsh{} create fake images dir}
+          
+                  \PY{c+c1}{\PYZsh{} model parameters}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{num\PYZus{}epochs} \PY{o}{=} \PY{n}{num\PYZus{}epochs} \PY{c+c1}{\PYZsh{} number of epochs to train for}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{start\PYZus{}epoch} \PY{o}{=} \PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{} the starting epoch}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{criterion} \PY{o}{=} \PY{n}{criterion} \PY{c+c1}{\PYZsh{} loss function}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{real\PYZus{}label} \PY{o}{=} \PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{} Establish convention for real and fake labels during}
+          \PY{n}{training}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fake\PYZus{}label} \PY{o}{=} \PY{l+m+mi}{0}
+          
+                  \PY{c+c1}{\PYZsh{} networks init}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{netD} \PY{o}{=} \PY{n}{netD}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{netG} \PY{o}{=} \PY{n}{netG}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{optimizerD} \PY{o}{=} \PY{n}{optimizerD}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{optimizerG} \PY{o}{=} \PY{n}{optimizerG}
+          
+                  \PY{c+c1}{\PYZsh{} device}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{device} \PY{o}{=} \PY{n}{device} \PY{c+c1}{\PYZsh{} specify device being used}
+          
+                  \PY{c+c1}{\PYZsh{} Create fixed noise to visualize the progression of the generator}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fixed\PYZus{}noise} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{64}\PY{p}{,} \PY{n}{nz}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{device}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{device}\PY{p}{)} \PY{c+c1}{\PYZsh{}}
+          \PY{n}{torch}\PY{o}{.}\PY{n}{Size}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{64}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+          
+          
+              \PY{k}{def} \PY{n+nf}{expand\PYZus{}labels}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{)}\PY{p}{:}
+          
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        Function to broadcast 1D label tensor to 4D tensor.}
+          
+          \PY{l+s+sd}{        Inputs}
+          
+          \PY{l+s+sd}{            labels (ARR)}
+          \PY{l+s+sd}{                1D array of integer\PYZhy{}labels to be casted to a 4D tensor.}
+          
+          \PY{l+s+sd}{            batch\PYZus{}size (INT)}
+          \PY{l+s+sd}{                Batch size of the current dataset}
+          
+          \PY{l+s+sd}{            n\PYZus{}classes (INT)}
+          \PY{l+s+sd}{                Number of classes in the labels.}
+          
+          \PY{l+s+sd}{            img\PYZus{}size}
+          \PY{l+s+sd}{                The sizes of the 3rd and 4th dimension, which are assumed to be of equal}
+          \PY{l+s+sd}{size}
+          \PY{l+s+sd}{                since we are dealing with square images. The 2nd dimension is always the}
+          \PY{l+s+sd}{                number of classes.}
+          
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+          
+                  \PY{c+c1}{\PYZsh{} convert labels to 2D for the scatter}
+                  \PY{n}{y} \PY{o}{=} \PY{n}{labels}\PY{o}{.}\PY{n}{view}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{} create one\PYZhy{}hot\PYZhy{}encoding buffer}
+                  \PY{n}{y\PYZus{}onehot} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{FloatTensor}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{} fill buffer with zeros}
+                  \PY{n}{y\PYZus{}onehot}\PY{o}{.}\PY{n}{zero\PYZus{}}\PY{p}{(}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{} fill buffer with 1 where index == label value}
+                  \PY{n}{y\PYZus{}onehot}\PY{o}{.}\PY{n}{scatter\PYZus{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{} cast 2D tensor to 3D}
+                  \PY{n}{y\PYZus{}onehot}\PY{o}{.}\PY{n}{unsqueeze\PYZus{}}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} [batch\PYZus{}size, n\PYZus{}classes, 1]}
+                  \PY{n}{y\PYZus{}onehot} \PY{o}{=} \PY{n}{y\PYZus{}onehot}\PY{o}{.}\PY{n}{expand}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{)} \PY{c+c1}{\PYZsh{} [batch\PYZus{}size,}
+          \PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{]}
+          
+                  \PY{c+c1}{\PYZsh{} cast 3D tensor to 4D}
+                  \PY{n}{y\PYZus{}onehot}\PY{o}{.}\PY{n}{unsqueeze\PYZus{}}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} [batch\PYZus{}size, n\PYZus{}classes, img\PYZus{}size, 1]}
+                  \PY{n}{y\PYZus{}onehot} \PY{o}{=} \PY{n}{y\PYZus{}onehot}\PY{o}{.}\PY{n}{expand}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{)} \PY{c+c1}{\PYZsh{}}
+          \PY{p}{[}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{]}
+          
+                  \PY{k}{return} \PY{n}{y\PYZus{}onehot}
+          
+          
+              \PY{k}{def} \PY{n+nf}{generate\PYZus{}fake\PYZus{}images}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{class\PYZus{}index\PYZus{}tensor}\PY{p}{,} \PY{n}{noise}\PY{p}{,} \PY{n}{image\PYZus{}name} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{random}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+          \PY{n}{save} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{p}{:}
+          
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        Generate a batch of fake images using current generator weights.}
+          
+          \PY{l+s+sd}{        Inputs}
+          
+          \PY{l+s+sd}{            class\PYZus{}index\PYZus{}tensor (LongTensor)}
+          \PY{l+s+sd}{                The class index to create fake images for. The number of fake images}
+          \PY{l+s+sd}{generated is equal}
+          \PY{l+s+sd}{                to the length of the tensor. So a tensor filled with 10 \PYZdq{}1\PYZdq{}s will}
+          \PY{l+s+sd}{generate 10 images for}
+          \PY{l+s+sd}{                the class that corresponds to \PYZdq{}1\PYZdq{}.}
+          
+          \PY{l+s+sd}{            noise (Tensor)}
+          \PY{l+s+sd}{                Random noise that will be put through the generator weights to produce}
+          \PY{l+s+sd}{an image.}
+          
+          \PY{l+s+sd}{            image\PYZus{}name (STR)}
+          \PY{l+s+sd}{                Image name for the saved file.}
+          \PY{l+s+sd}{                If running this function in model training, image\PYZus{}name should contain a}
+          \PY{l+s+sd}{changing variable,}
+          \PY{l+s+sd}{                otherwise the files will just keep overwriting each other with the same}
+          \PY{l+s+sd}{name.}
+          \PY{l+s+sd}{                Default: \PYZsq{}random\PYZsq{} (in case save = True but no image\PYZus{}name provided)}
+          
+          \PY{l+s+sd}{            save (BOOL)}
+          \PY{l+s+sd}{                If save is TRUE, the image file will be saved in the specified}
+          \PY{l+s+sd}{\PYZdq{}self.fake\PYZus{}image\PYZus{}dir\PYZdq{}.}
+          \PY{l+s+sd}{                Otherwise, just return the image data for plotting.}
+          \PY{l+s+sd}{                Default: TRUE}
+          
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                  \PY{k}{with} \PY{n}{torch}\PY{o}{.}\PY{n}{no\PYZus{}grad}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                      \PY{c+c1}{\PYZsh{} create fake images for all the labels in class\PYZus{}index\PYZus{}tensor}
+                      \PY{n}{fake} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{netG}\PY{p}{(}\PY{n}{noise}\PY{p}{,} \PY{n}{class\PYZus{}index\PYZus{}tensor}\PY{p}{)}\PY{o}{.}\PY{n}{detach}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{cpu}\PY{p}{(}\PY{p}{)}
+          
+                  \PY{k}{if} \PY{n}{save}\PY{p}{:} \PY{c+c1}{\PYZsh{} save images in the fake\PYZus{}image\PYZus{}dir}
+                      \PY{n}{save\PYZus{}image}\PY{p}{(}\PY{n}{fake}\PY{o}{.}\PY{n}{data}\PY{p}{,} \PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}self.fake\PYZus{}image\PYZus{}dir\PYZcb{}}\PY{l+s+s1}{/}\PY{l+s+si}{\PYZob{}image\PYZus{}name\PYZcb{}}\PY{l+s+s1}{.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{n}{nrow}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{normalize}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          
+                  \PY{k}{return} \PY{n}{fake}\PY{o}{.}\PY{n}{data}
+          
+          
+              \PY{k}{def} \PY{n+nf}{train}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+          
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        Training loop}
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                  \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{num\PYZus{}epochs} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                      \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{No epochs set for training. Exiting training loop.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                      \PY{k}{return}
+          
+                  \PY{c+c1}{\PYZsh{} Lists to keep track of progress}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{G\PYZus{}losses} \PY{o}{=} \PY{p}{[}\PY{p}{]} \PY{c+c1}{\PYZsh{} generator loss}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{D\PYZus{}losses} \PY{o}{=} \PY{p}{[}\PY{p}{]} \PY{c+c1}{\PYZsh{} discriminator loss}
+                  \PY{n}{iters} \PY{o}{=} \PY{l+m+mi}{0}
+          
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Starting Training Loop...}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                  \PY{c+c1}{\PYZsh{} For each epoch}
+                  \PY{k}{for} \PY{n}{epoch} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{start\PYZus{}epoch}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{start\PYZus{}epoch} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{num\PYZus{}epochs}\PY{p}{)}\PY{p}{:}
+                      \PY{c+c1}{\PYZsh{} For each batch in the dataloader}
+                      \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{p}{(}\PY{n}{imgs}\PY{p}{,} \PY{n}{class\PYZus{}labels}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dataloader}\PY{p}{)}\PY{p}{:}
+          
+                          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+                          \PY{c+c1}{\PYZsh{} (1) Update D network: maximize log(D(x)) + log(1 \PYZhy{} D(G(z)))}
+                          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+          
+                          \PY{c+c1}{\PYZsh{}\PYZsh{} Train with all\PYZhy{}real batch}
+                          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{netD}\PY{o}{.}\PY{n}{zero\PYZus{}grad}\PY{p}{(}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{} Format batch}
+                          \PY{n}{real\PYZus{}imgs} \PY{o}{=} \PY{n}{imgs}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{device}\PY{p}{)}
+                          \PY{n}{b\PYZus{}size} \PY{o}{=} \PY{n}{real\PYZus{}imgs}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{} Set ground truth labels as REAL}
+                          \PY{n}{validity\PYZus{}label} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{full}\PY{p}{(}\PY{p}{(}\PY{n}{b\PYZus{}size}\PY{p}{,}\PY{p}{)}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{real\PYZus{}label}\PY{p}{,} \PY{n}{device}\PY{o}{=}\PY{n}{device}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{} expand 1D class labels to 4D tensor}
+                          \PY{n}{class\PYZus{}labels} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{expand\PYZus{}labels}\PY{p}{(}\PY{n}{class\PYZus{}labels}\PY{p}{,} \PY{n}{b\PYZus{}size}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n\PYZus{}classes}\PY{p}{,}
+          \PY{l+m+mi}{32}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{} Forward pass real batch through D}
+                          \PY{n}{output} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{netD}\PY{p}{(}\PY{n}{real\PYZus{}imgs}\PY{p}{,} \PY{n}{class\PYZus{}labels}\PY{p}{)}\PY{o}{.}\PY{n}{view}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{} Calculate loss on all\PYZhy{}real batch}
+                          \PY{n}{errD\PYZus{}real} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{criterion}\PY{p}{(}\PY{n}{output}\PY{p}{,} \PY{n}{validity\PYZus{}label}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{} Calculate gradients for D in backward pass}
+                          \PY{n}{errD\PYZus{}real}\PY{o}{.}\PY{n}{backward}\PY{p}{(}\PY{p}{)}
+                          \PY{n}{D\PYZus{}x} \PY{o}{=} \PY{n}{output}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}
+          
+          
+                          \PY{c+c1}{\PYZsh{}\PYZsh{} Train with all\PYZhy{}fake batch}
+                          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+                          \PY{c+c1}{\PYZsh{} Generate batch of latent vectors}
+                          \PY{n}{noise} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{n}{b\PYZus{}size}\PY{p}{,} \PY{n}{nz}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{device}\PY{o}{=}\PY{n}{device}\PY{p}{)} \PY{c+c1}{\PYZsh{} torch.Size([128,}
+          \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{} Generate batch of fake labels}
+                          \PY{n}{gen\PYZus{}labels} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n\PYZus{}classes}\PY{p}{,}
+          \PY{p}{(}\PY{n}{b\PYZus{}size}\PY{p}{,}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{type}\PY{p}{(}\PY{n}{torch}\PY{o}{.}\PY{n}{LongTensor}\PY{p}{)} \PY{c+c1}{\PYZsh{} torch.Size([128])}
+          
+                          \PY{c+c1}{\PYZsh{} reshape generated labels from 1D to 4D for generator}
+                          \PY{n}{gen\PYZus{}labels\PYZus{}G} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{expand\PYZus{}labels}\PY{p}{(}\PY{n}{gen\PYZus{}labels}\PY{p}{,} \PY{n}{b\PYZus{}size}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{} Generate fake image batch with G}
+                          \PY{n}{fake} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{netG}\PY{p}{(}\PY{n}{noise}\PY{p}{,} \PY{n}{gen\PYZus{}labels\PYZus{}G}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{} Update ground truth labels to FAKE}
+                          \PY{n}{validity\PYZus{}label}\PY{o}{.}\PY{n}{fill\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fake\PYZus{}label}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{} reshape generated labels from 1D to 4D for discriminator}
+                          \PY{n}{gen\PYZus{}labels\PYZus{}D} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{expand\PYZus{}labels}\PY{p}{(}\PY{n}{gen\PYZus{}labels}\PY{p}{,} \PY{n}{b\PYZus{}size}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n\PYZus{}classes}\PY{p}{,}
+          \PY{l+m+mi}{32}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{} Classify all fake batch with D}
+                          \PY{n}{output} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{netD}\PY{p}{(}\PY{n}{fake}\PY{o}{.}\PY{n}{detach}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{gen\PYZus{}labels\PYZus{}D}\PY{p}{)}\PY{o}{.}\PY{n}{view}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{} Calculate D\PYZsq{}s loss on the all\PYZhy{}fake batch}
+                          \PY{n}{errD\PYZus{}fake} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{criterion}\PY{p}{(}\PY{n}{output}\PY{p}{,} \PY{n}{validity\PYZus{}label}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{} Calculate the gradients for this batch}
+                          \PY{n}{errD\PYZus{}fake}\PY{o}{.}\PY{n}{backward}\PY{p}{(}\PY{p}{)}
+                          \PY{n}{D\PYZus{}G\PYZus{}z1} \PY{o}{=} \PY{n}{output}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{} Add the gradients from the all\PYZhy{}real and all\PYZhy{}fake batches}
+                          \PY{n}{errD} \PY{o}{=} \PY{n}{errD\PYZus{}real} \PY{o}{+} \PY{n}{errD\PYZus{}fake}
+          
+                          \PY{c+c1}{\PYZsh{} Update D}
+                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{optimizerD}\PY{o}{.}\PY{n}{step}\PY{p}{(}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+                          \PY{c+c1}{\PYZsh{} (2) Update G network: maximize log(D(G(z)))}
+                          \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+          
+                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{netG}\PY{o}{.}\PY{n}{zero\PYZus{}grad}\PY{p}{(}\PY{p}{)}
+          
+                          \PY{n}{validity\PYZus{}label}\PY{o}{.}\PY{n}{fill\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{real\PYZus{}label}\PY{p}{)}  \PY{c+c1}{\PYZsh{} fake labels are real for}
+          \PY{n}{generator} \PY{n}{cost}
+          
+                          \PY{c+c1}{\PYZsh{} Since we just updated D, perform another forward pass of all\PYZhy{}fake}
+          \PY{n}{batch} \PY{n}{through} \PY{n}{D}
+                          \PY{n}{output} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{netD}\PY{p}{(}\PY{n}{fake}\PY{p}{,} \PY{n}{gen\PYZus{}labels\PYZus{}D}\PY{p}{)}\PY{o}{.}\PY{n}{view}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{} Calculate G\PYZsq{}s loss based on this output}
+                          \PY{n}{errG} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{criterion}\PY{p}{(}\PY{n}{output}\PY{p}{,} \PY{n}{validity\PYZus{}label}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{} Calculate gradients for G}
+                          \PY{n}{errG}\PY{o}{.}\PY{n}{backward}\PY{p}{(}\PY{p}{)}
+                          \PY{n}{D\PYZus{}G\PYZus{}z2} \PY{o}{=} \PY{n}{output}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{} Update G}
+                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{optimizerG}\PY{o}{.}\PY{n}{step}\PY{p}{(}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{} Output training stats}
+                          \PY{k}{if} \PY{n}{i} \PY{o}{\PYZpc{}} \PY{l+m+mi}{50} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                              \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[}\PY{l+s+si}{\PYZob{}epoch\PYZcb{}}\PY{l+s+s1}{/}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{self.start\PYZus{}epoch + self.num\PYZus{}epochs \PYZhy{}}
+          \PY{l+m+mi}{1}\PY{p}{\PYZcb{}}\PY{p}{]}\PY{p}{[}\PY{p}{\PYZob{}}\PY{n}{i}\PY{p}{\PYZcb{}}\PY{o}{/}\PY{p}{\PYZob{}}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dataloader}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{]}\PYZbs{}\PY{n}{tLoss\PYZus{}D}\PY{p}{:} \PY{p}{\PYZob{}}\PY{n+nb}{round}\PY{p}{(}\PY{n}{errD}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{\PYZcb{}}\PYZbs{}\PY{n}{tLoss\PYZus{}G}\PY{p}{:}
+          \PY{p}{\PYZob{}}\PY{n+nb}{round}\PY{p}{(}\PY{n}{errG}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{\PYZcb{}}\PYZbs{}\PY{n}{tD}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:} \PY{p}{\PYZob{}}\PY{n+nb}{round}\PY{p}{(}\PY{n}{D\PYZus{}x}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{\PYZcb{}}\PYZbs{}\PY{n}{tD}\PY{p}{(}\PY{n}{G}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{p}{)}\PY{p}{:} \PY{p}{\PYZob{}}\PY{n+nb}{round}\PY{p}{(}\PY{n}{D\PYZus{}G\PYZus{}z1}\PY{o}{/}\PY{n}{D\PYZus{}G\PYZus{}z2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+          
+                          \PY{c+c1}{\PYZsh{} Save Losses for plotting later}
+                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{G\PYZus{}losses}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{errG}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{D\PYZus{}losses}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{errD}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          
+                          \PY{c+c1}{\PYZsh{} Check how the generator is doing by saving G\PYZsq{}s output on fixed\PYZus{}noise}
+                          \PY{c+c1}{\PYZsh{} every 500 iterations, or on the last batch of the last epoch}
+                          \PY{k}{if} \PY{p}{(}\PY{n}{iters} \PY{o}{\PYZpc{}} \PY{l+m+mi}{500} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)} \PY{o+ow}{or} \PY{p}{(}\PY{p}{(}\PY{n}{epoch} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{num\PYZus{}epochs}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{o+ow}{and} \PY{p}{(}\PY{n}{i} \PY{o}{==}
+          \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dataloader}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+          
+                              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Saving a batch of fake images.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+                              \PY{n}{class\PYZus{}index} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n\PYZus{}classes}\PY{p}{)} \PY{c+c1}{\PYZsh{} get class indices}
+                              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{class\PYZus{}index}\PY{p}{:}
+                                  \PY{n}{class\PYZus{}index\PYZus{}tensor} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{LongTensor}\PY{p}{(}\PY{l+m+mi}{64}\PY{p}{)}\PY{o}{.}\PY{n}{fill\PYZus{}}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{c+c1}{\PYZsh{} repeat the}
+          \PY{n}{same} \PY{k}{class} \PY{n+nc}{index} \PY{l+m+mi}{64} \PY{n}{times}
+                                  \PY{n}{class\PYZus{}index\PYZus{}tensor} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{expand\PYZus{}labels}\PY{p}{(}\PY{n}{class\PYZus{}index\PYZus{}tensor}\PY{p}{,} \PY{l+m+mi}{64}\PY{p}{,}
+          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} reshape to 4D}
+                                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{generate\PYZus{}fake\PYZus{}images}\PY{p}{(}\PY{n}{class\PYZus{}index\PYZus{}tensor}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fixed\PYZus{}noise}\PY{p}{,}
+                                                            \PY{n}{image\PYZus{}name} \PY{o}{=}
+          \PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}self.classes[i]\PYZcb{}}\PY{l+s+s1}{\PYZus{}e}\PY{l+s+si}{\PYZob{}epoch\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{save} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+          
+                          \PY{n}{iters} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+          
+                      \PY{c+c1}{\PYZsh{} automatically save model for first epoch (testing) and every 5 epochs}
+                      \PY{k}{if} \PY{n}{epoch} \PY{o}{==} \PY{l+m+mi}{1} \PY{o+ow}{or} \PY{n}{epoch} \PY{o}{\PYZpc{}} \PY{l+m+mi}{5} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{epoch}\PY{p}{)}
+          
+                  \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Finished Training for }\PY{l+s+si}{\PYZob{}epoch\PYZcb{}}\PY{l+s+s2}{ epochs.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{epoch}\PY{p}{)}
+          
+          
+              \PY{k}{def} \PY{n+nf}{save}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{epoch}\PY{p}{)}\PY{p}{:}
+          
+                  \PY{c+c1}{\PYZsh{} save the model checkpoint}
+                  \PY{n}{filepath} \PY{o}{=} \PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}self.checkpoint\PYZus{}dir\PYZcb{}}\PY{l+s+s1}{/checkpoint\PYZus{}e}\PY{l+s+si}{\PYZob{}epoch\PYZcb{}}\PY{l+s+s1}{.pth.tar}\PY{l+s+s1}{\PYZsq{}}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{=\PYZgt{} Saving checkpoint: }\PY{l+s+si}{\PYZob{}filepath\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+                  \PY{n}{state} \PY{o}{=} \PY{p}{\PYZob{}}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D\PYZus{}losses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{D\PYZus{}losses}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G\PYZus{}losses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{G\PYZus{}losses}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{epoch}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{epoch}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{netD\PYZus{}state\PYZus{}dict}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{netD}\PY{o}{.}\PY{n}{state\PYZus{}dict}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{optimizerD}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{optimizerD}\PY{o}{.}\PY{n}{state\PYZus{}dict}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{netG\PYZus{}state\PYZus{}dict}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{netG}\PY{o}{.}\PY{n}{state\PYZus{}dict}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{optimizerG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{optimizerG}\PY{o}{.}\PY{n}{state\PYZus{}dict}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                  \PY{p}{\PYZcb{}}
+          
+                  \PY{n}{torch}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{state}\PY{p}{,} \PY{n}{filepath}\PY{p}{)}
+          
+          
+              \PY{k}{def} \PY{n+nf}{load}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{loadpath}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        When loading model checkpoint, just load the epoch and state dicts to continue}
+          \PY{l+s+sd}{training.}
+          \PY{l+s+sd}{        The D\PYZhy{}loss and G\PYZhy{}loss can be stored within their respective checkpoints}
+          \PY{l+s+sd}{        and referred to later when needed.}
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                  \PY{k}{if} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{isfile}\PY{p}{(}\PY{n}{loadpath}\PY{p}{)}\PY{p}{:}
+                      \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{=\PYZgt{} loading checkpoint: }\PY{l+s+si}{\PYZob{}loadpath\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                      \PY{n}{checkpoint} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{loadpath}\PY{p}{)}
+          
+                      \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{start\PYZus{}epoch} \PY{o}{=} \PY{n}{checkpoint}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{epoch}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}
+                      \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{netD}\PY{o}{.}\PY{n}{load\PYZus{}state\PYZus{}dict}\PY{p}{(}\PY{n}{checkpoint}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{netD\PYZus{}state\PYZus{}dict}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                      \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{netG}\PY{o}{.}\PY{n}{load\PYZus{}state\PYZus{}dict}\PY{p}{(}\PY{n}{checkpoint}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{netG\PYZus{}state\PYZus{}dict}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                      \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{optimizerD}\PY{o}{.}\PY{n}{load\PYZus{}state\PYZus{}dict}\PY{p}{(}\PY{n}{checkpoint}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{optimizerD}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                      \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{optimizerG}\PY{o}{.}\PY{n}{load\PYZus{}state\PYZus{}dict}\PY{p}{(}\PY{n}{checkpoint}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{optimizerG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          
+                      \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{=\PYZgt{} loaded checkpoint: }\PY{l+s+si}{\PYZob{}loadpath\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                      \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Last epoch was }\PY{l+s+si}{\PYZob{}checkpoint[\PYZsq{}epoch\PYZsq{}]\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{=\PYZgt{} No checkpoint found at: }\PY{l+s+si}{\PYZob{}loadpath\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          
+              \PY{k}{def} \PY{n+nf}{visualize\PYZus{}results}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+          
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Generator and Discriminator Loss During Training}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{G\PYZus{}losses}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{G}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{D\PYZus{}losses}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{iterations}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Loss}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \subsection{CIFAR10 Model}\label{cifar10-model}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}103}]:} \PY{c+c1}{\PYZsh{} Create the Discriminator}
+          \PY{n}{netD} \PY{o}{=} \PY{n}{cDiscriminator}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{cifar\PYZus{}classes}\PY{p}{)}\PY{p}{,} \PY{n}{ngpu}\PY{p}{)}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Apply the weights\PYZus{}init function to randomly initialize all weights to mean=0,}
+          \PY{n}{stdev}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{o}{.}
+          \PY{n}{netD}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{weights\PYZus{}init}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Print the model}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{netD}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Create the generator}
+          \PY{n}{netG} \PY{o}{=} \PY{n}{cGenerator}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{cifar\PYZus{}classes}\PY{p}{)}\PY{p}{,} \PY{n}{ngpu}\PY{p}{)}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Apply the weights\PYZus{}init function to randomly initialize all weights to mean=0,}
+          \PY{n}{stdev}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{o}{.}
+          \PY{n}{netG}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{weights\PYZus{}init}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Print the model}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{netG}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+cDiscriminator(
+  (image\_conv): Sequential(
+    (0): Conv2d(3, 32, kernel\_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (1): LeakyReLU(negative\_slope=0.2, inplace)
+  )
+  (label\_conv): Sequential(
+    (0): Conv2d(10, 32, kernel\_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (1): LeakyReLU(negative\_slope=0.2, inplace)
+  )
+  (main): Sequential(
+    (0): Conv2d(64, 64, kernel\_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True,
+track\_running\_stats=True)
+    (2): LeakyReLU(negative\_slope=0.2, inplace)
+    (3): Conv2d(64, 128, kernel\_size=(4, 4), stride=(2, 2), padding=(1, 1),
+bias=False)
+    (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True,
+track\_running\_stats=True)
+    (5): LeakyReLU(negative\_slope=0.2, inplace)
+    (6): Conv2d(128, 1, kernel\_size=(4, 4), stride=(1, 1), bias=False)
+    (7): Sigmoid()
+  )
+)
+cGenerator(
+  (deconv1\_1): ConvTranspose2d(100, 256, kernel\_size=(4, 4), stride=(1, 1))
+  (deconv1\_1\_bn): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True,
+track\_running\_stats=True)
+  (deconv1\_2): ConvTranspose2d(10, 256, kernel\_size=(4, 4), stride=(1, 1))
+  (deconv1\_2\_bn): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True,
+track\_running\_stats=True)
+  (deconv2): ConvTranspose2d(512, 128, kernel\_size=(4, 4), stride=(2, 2), padding=(1,
+1))
+  (deconv2\_bn): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True,
+track\_running\_stats=True)
+  (deconv3): ConvTranspose2d(128, 32, kernel\_size=(4, 4), stride=(2, 2), padding=(1,
+1))
+  (deconv3\_bn): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True,
+track\_running\_stats=True)
+  (deconv4): ConvTranspose2d(32, 3, kernel\_size=(4, 4), stride=(2, 2), padding=(1, 1))
+)
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}109}]:} \PY{n}{kwargs} \PY{o}{=} \PY{p}{\PYZob{}}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dataloader}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{trainloader}\PY{p}{,} \PY{c+c1}{\PYZsh{} cifar dataloader}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{classes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{cifar\PYZus{}classes}\PY{p}{,} \PY{c+c1}{\PYZsh{} cifar classes}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{save\PYZus{}dir}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cDCGAN\PYZhy{}cifar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num\PYZus{}epochs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{30}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{criterion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{nn}\PY{o}{.}\PY{n}{BCELoss}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{c+c1}{\PYZsh{} Initialize BCELoss function}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{netD}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{netD}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{netG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{netG}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{optimizerD}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{optim}\PY{o}{.}\PY{n}{Adam}\PY{p}{(}\PY{n}{netD}\PY{o}{.}\PY{n}{parameters}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{lr}\PY{o}{=}\PY{n}{lr}\PY{p}{,} \PY{n}{betas}\PY{o}{=}\PY{p}{(}\PY{n}{beta1}\PY{p}{,} \PY{l+m+mf}{0.999}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{optimizerG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{optim}\PY{o}{.}\PY{n}{Adam}\PY{p}{(}\PY{n}{netG}\PY{o}{.}\PY{n}{parameters}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{lr}\PY{o}{=}\PY{n}{lr}\PY{p}{,} \PY{n}{betas}\PY{o}{=}\PY{p}{(}\PY{n}{beta1}\PY{p}{,} \PY{l+m+mf}{0.999}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{device}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{device}
+          \PY{p}{\PYZcb{}}
+          
+          \PY{n}{cdcgan\PYZus{}cifar} \PY{o}{=} \PY{n}{cDCGAN}\PY{p}{(}\PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+cDCGAN-cifar directory exists.
+cDCGAN-cifar/checkpoints directory exists.
+cDCGAN-cifar/fake\_images directory exists.
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{cdcgan\PYZus{}cifar}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}118}]:} \PY{n}{cdcgan\PYZus{}cifar}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cDCGAN\PYZhy{}cifar/checkpoints/checkpoint\PYZus{}e30.pth.tar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+=> loading checkpoint: cDCGAN-cifar/checkpoints/checkpoint\_e30.pth.tar
+=> loaded checkpoint: cDCGAN-cifar/checkpoints/checkpoint\_e30.pth.tar
+Last epoch was 30
+
+    \end{Verbatim}
+
+    \subsection{Novel Dataset Model}\label{novel-dataset-model}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}112}]:} \PY{c+c1}{\PYZsh{} Create the Discriminator}
+          \PY{n}{netD} \PY{o}{=} \PY{n}{cDiscriminator}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{dataset}\PY{o}{.}\PY{n}{classes}\PY{p}{)}\PY{p}{,} \PY{n}{ngpu}\PY{p}{)}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Apply the weights\PYZus{}init function to randomly initialize all weights to mean=0,}
+          \PY{n}{stdev}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{o}{.}
+          \PY{n}{netD}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{weights\PYZus{}init}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Print the model}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{netD}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Create the generator}
+          \PY{n}{netG} \PY{o}{=} \PY{n}{cGenerator}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{dataset}\PY{o}{.}\PY{n}{classes}\PY{p}{)}\PY{p}{,} \PY{n}{ngpu}\PY{p}{)}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Apply the weights\PYZus{}init function to randomly initialize all weights to mean=0,}
+          \PY{n}{stdev}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{o}{.}
+          \PY{n}{netG}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{weights\PYZus{}init}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Print the model}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{netG}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+cDiscriminator(
+  (image\_conv): Sequential(
+    (0): Conv2d(3, 32, kernel\_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (1): LeakyReLU(negative\_slope=0.2, inplace)
+  )
+  (label\_conv): Sequential(
+    (0): Conv2d(3, 32, kernel\_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (1): LeakyReLU(negative\_slope=0.2, inplace)
+  )
+  (main): Sequential(
+    (0): Conv2d(64, 64, kernel\_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True,
+track\_running\_stats=True)
+    (2): LeakyReLU(negative\_slope=0.2, inplace)
+    (3): Conv2d(64, 128, kernel\_size=(4, 4), stride=(2, 2), padding=(1, 1),
+bias=False)
+    (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True,
+track\_running\_stats=True)
+    (5): LeakyReLU(negative\_slope=0.2, inplace)
+    (6): Conv2d(128, 1, kernel\_size=(4, 4), stride=(1, 1), bias=False)
+    (7): Sigmoid()
+  )
+)
+cGenerator(
+  (deconv1\_1): ConvTranspose2d(100, 256, kernel\_size=(4, 4), stride=(1, 1))
+  (deconv1\_1\_bn): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True,
+track\_running\_stats=True)
+  (deconv1\_2): ConvTranspose2d(3, 256, kernel\_size=(4, 4), stride=(1, 1))
+  (deconv1\_2\_bn): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True,
+track\_running\_stats=True)
+  (deconv2): ConvTranspose2d(512, 128, kernel\_size=(4, 4), stride=(2, 2), padding=(1,
+1))
+  (deconv2\_bn): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True,
+track\_running\_stats=True)
+  (deconv3): ConvTranspose2d(128, 32, kernel\_size=(4, 4), stride=(2, 2), padding=(1,
+1))
+  (deconv3\_bn): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True,
+track\_running\_stats=True)
+  (deconv4): ConvTranspose2d(32, 3, kernel\_size=(4, 4), stride=(2, 2), padding=(1, 1))
+)
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}114}]:} \PY{n}{kwargs} \PY{o}{=} \PY{p}{\PYZob{}}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dataloader}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{dataloader}\PY{p}{,} \PY{c+c1}{\PYZsh{} novel data dataloader}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{classes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{dataset}\PY{o}{.}\PY{n}{classes}\PY{p}{,} \PY{c+c1}{\PYZsh{} novel dataset classes}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{save\PYZus{}dir}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cDCGAN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num\PYZus{}epochs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{30}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{criterion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{nn}\PY{o}{.}\PY{n}{BCELoss}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{c+c1}{\PYZsh{} Initialize BCELoss function}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{netD}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{netD}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{netG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{netG}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{optimizerD}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{optim}\PY{o}{.}\PY{n}{Adam}\PY{p}{(}\PY{n}{netD}\PY{o}{.}\PY{n}{parameters}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{lr}\PY{o}{=}\PY{n}{lr}\PY{p}{,} \PY{n}{betas}\PY{o}{=}\PY{p}{(}\PY{n}{beta1}\PY{p}{,} \PY{l+m+mf}{0.999}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{optimizerG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{optim}\PY{o}{.}\PY{n}{Adam}\PY{p}{(}\PY{n}{netG}\PY{o}{.}\PY{n}{parameters}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{lr}\PY{o}{=}\PY{n}{lr}\PY{p}{,} \PY{n}{betas}\PY{o}{=}\PY{p}{(}\PY{n}{beta1}\PY{p}{,} \PY{l+m+mf}{0.999}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{device}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{device}
+          \PY{p}{\PYZcb{}}
+          
+          \PY{n}{cdcgan} \PY{o}{=} \PY{n}{cDCGAN}\PY{p}{(}\PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+cDCGAN directory exists.
+cDCGAN/checkpoints directory exists.
+cDCGAN/fake\_images directory exists.
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{cdcgan}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}116}]:} \PY{n}{cdcgan}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cDCGAN/checkpoints/checkpoint\PYZus{}e30.pth.tar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+=> loading checkpoint: cDCGAN/checkpoints/checkpoint\_e30.pth.tar
+=> loaded checkpoint: cDCGAN/checkpoints/checkpoint\_e30.pth.tar
+Last epoch was 30
+
+    \end{Verbatim}
+
+    \subsection{Functions for Visualizing
+Results}\label{functions-for-visualizing-results}
+
+The following functions were used to visualize the generated images. The
+output is seen in the results section above. On hindsight, I realized
+that I should have used the \texttt{self.expand\_labels} function in the
+\texttt{self.generate\_fake\_images} method, but it was too late. I will
+refactor this next time.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}138}]:} \PY{k}{def} \PY{n+nf}{expand\PYZus{}labels}\PY{p}{(}\PY{n}{labels}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{)}\PY{p}{:}
+          
+              \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{    Function to broadcast 1D label tensor to 4D tensor.}
+          
+          \PY{l+s+sd}{    Inputs}
+          
+          \PY{l+s+sd}{        labels (ARR)}
+          \PY{l+s+sd}{            1D array of integer\PYZhy{}labels to be casted to a 4D tensor.}
+          
+          \PY{l+s+sd}{        batch\PYZus{}size (INT)}
+          \PY{l+s+sd}{            Batch size of the current dataset}
+          
+          \PY{l+s+sd}{        n\PYZus{}classes (INT)}
+          \PY{l+s+sd}{            Number of classes in the labels.}
+          
+          \PY{l+s+sd}{        img\PYZus{}size}
+          \PY{l+s+sd}{            The sizes of the 3rd and 4th dimension, which are assumed to be of equal}
+          \PY{l+s+sd}{size}
+          \PY{l+s+sd}{            since we are dealing with square images. The 2nd dimension is always the}
+          \PY{l+s+sd}{            number of classes.}
+          
+          \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+          
+              \PY{c+c1}{\PYZsh{} convert labels to 2D for the scatter}
+              \PY{n}{y} \PY{o}{=} \PY{n}{labels}\PY{o}{.}\PY{n}{view}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          
+              \PY{c+c1}{\PYZsh{} create one\PYZhy{}hot\PYZhy{}encoding buffer}
+              \PY{n}{y\PYZus{}onehot} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{FloatTensor}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{)}
+          
+              \PY{c+c1}{\PYZsh{} fill buffer with zeros}
+              \PY{n}{y\PYZus{}onehot}\PY{o}{.}\PY{n}{zero\PYZus{}}\PY{p}{(}\PY{p}{)}
+          
+              \PY{c+c1}{\PYZsh{} fill buffer with 1 where index == label value}
+              \PY{n}{y\PYZus{}onehot}\PY{o}{.}\PY{n}{scatter\PYZus{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+          
+              \PY{c+c1}{\PYZsh{} cast 2D tensor to 3D}
+              \PY{n}{y\PYZus{}onehot}\PY{o}{.}\PY{n}{unsqueeze\PYZus{}}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} [batch\PYZus{}size, n\PYZus{}classes, 1]}
+              \PY{n}{y\PYZus{}onehot} \PY{o}{=} \PY{n}{y\PYZus{}onehot}\PY{o}{.}\PY{n}{expand}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{)} \PY{c+c1}{\PYZsh{} [batch\PYZus{}size,}
+          \PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{]}
+          
+              \PY{c+c1}{\PYZsh{} cast 3D tensor to 4D}
+              \PY{n}{y\PYZus{}onehot}\PY{o}{.}\PY{n}{unsqueeze\PYZus{}}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} [batch\PYZus{}size, n\PYZus{}classes, img\PYZus{}size, 1]}
+              \PY{n}{y\PYZus{}onehot} \PY{o}{=} \PY{n}{y\PYZus{}onehot}\PY{o}{.}\PY{n}{expand}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{)} \PY{c+c1}{\PYZsh{} [batch\PYZus{}size,}
+          \PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{]}
+          
+              \PY{k}{return} \PY{n}{y\PYZus{}onehot}
+          
+          
+          \PY{k}{def} \PY{n+nf}{plot\PYZus{}gen\PYZus{}images}\PY{p}{(}\PY{n}{classes}\PY{p}{,} \PY{n}{model}\PY{p}{,} \PY{n}{no\PYZus{}of\PYZus{}images} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{    Plots the generated images for each class.}
+          
+          \PY{l+s+sd}{    Inputs}
+          \PY{l+s+sd}{        classes (ARR)}
+          \PY{l+s+sd}{            List of classes to be used as labels for generating fake images.}
+          
+          \PY{l+s+sd}{        model (MODEL)}
+          \PY{l+s+sd}{            Pytorch model to be used for generating fake images.}
+          
+          \PY{l+s+sd}{        no\PYZus{}of\PYZus{}images (INT)}
+          \PY{l+s+sd}{            Number of fake images to generated for each class.}
+          \PY{l+s+sd}{            Default: 10.}
+          \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+              \PY{n}{noise} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{n}{no\PYZus{}of\PYZus{}images}\PY{p}{,} \PY{n}{nz}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{device}\PY{o}{=}\PY{n}{device}\PY{p}{)}
+          
+              \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{classes}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{labels} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{LongTensor}\PY{p}{(}\PY{n}{no\PYZus{}of\PYZus{}images}\PY{p}{)}\PY{o}{.}\PY{n}{fill\PYZus{}}\PY{p}{(}\PY{n}{c}\PY{p}{)}
+                  \PY{n}{reshaped\PYZus{}labels} \PY{o}{=} \PY{n}{expand\PYZus{}labels}\PY{p}{(}\PY{n}{labels}\PY{p}{,} \PY{n}{no\PYZus{}of\PYZus{}images}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{classes}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} reshape}
+          \PY{n}{to} \PY{l+m+mi}{4}\PY{n}{D}
+                  \PY{n}{images} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{generate\PYZus{}fake\PYZus{}images}\PY{p}{(}\PY{n}{reshaped\PYZus{}labels}\PY{p}{,} \PY{n}{noise} \PY{o}{=} \PY{n}{noise}\PY{p}{,} \PY{n}{save} \PY{o}{=}
+          \PY{k+kc}{False}\PY{p}{)}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fake }\PY{l+s+si}{\PYZob{}classes[c]\PYZcb{}}\PY{l+s+s1}{ (epoch = 30)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{n}{vutils}\PY{o}{.}\PY{n}{make\PYZus{}grid}\PY{p}{(}\PY{n}{images}\PY{p}{,} \PY{n}{nrow} \PY{o}{=} \PY{n}{no\PYZus{}of\PYZus{}images}\PY{p}{,} \PY{n}{normalize}
+          \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          
+          
+          \PY{k}{def} \PY{n+nf}{plot\PYZus{}progression}\PY{p}{(}\PY{n}{my\PYZus{}dir}\PY{p}{,} \PY{n}{class\PYZus{}name}\PY{p}{,} \PY{n}{fig\PYZus{}w}\PY{p}{,} \PY{n}{fig\PYZus{}h}\PY{p}{,} \PY{n}{nrows}\PY{p}{,} \PY{n}{ncols}\PY{p}{,} \PY{n}{info} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{    Plot the cDCGAN\PYZsq{}s image generation progression throughout the training process.}
+          
+          \PY{l+s+sd}{    Inputs}
+          \PY{l+s+sd}{        my\PYZus{}dir (STR)}
+          \PY{l+s+sd}{            Directory of generator progression images.}
+          \PY{l+s+sd}{            Images should be labelled with digit numbers for sorting.}
+          
+          \PY{l+s+sd}{        class\PYZus{}name (STR)}
+          \PY{l+s+sd}{            Specific class label to be plotted.}
+          
+          \PY{l+s+sd}{        fig\PYZus{}w (INT)}
+          \PY{l+s+sd}{            Figure width.}
+          
+          \PY{l+s+sd}{        fig\PYZus{}h (INT)}
+          \PY{l+s+sd}{            Figure height.}
+          
+          \PY{l+s+sd}{        nrows (INT)}
+          \PY{l+s+sd}{            Number of rows in plot.}
+          
+          \PY{l+s+sd}{        ncols (INT)}
+          \PY{l+s+sd}{            Number of columns in plot.}
+          
+          \PY{l+s+sd}{        info (BOOL)}
+          \PY{l+s+sd}{            If true, displays the number of images to be plotted and the list of image}
+          \PY{l+s+sd}{names.}
+          \PY{l+s+sd}{            Default: False.}
+          \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+              \PY{n}{dir\PYZus{}list} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{my\PYZus{}dir}\PY{p}{)} \PY{c+c1}{\PYZsh{} get list of images in directory}
+              \PY{n}{img\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{dir\PYZus{}list} \PY{k}{if} \PY{n}{class\PYZus{}name} \PY{o+ow}{in} \PY{n}{i}\PY{p}{]} \PY{c+c1}{\PYZsh{} get list of images in a}
+          \PY{n}{specific} \PY{k}{class}
+              \PY{n+nc}{img\PYZus{}list}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{key} \PY{o}{=} \PY{k}{lambda} \PY{n}{f}\PY{p}{:} \PY{n+nb}{int}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n+nb}{filter}\PY{p}{(}\PY{n+nb}{str}\PY{o}{.}\PY{n}{isdigit}\PY{p}{,} \PY{n}{f}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} sort in}
+          \PY{n}{ascending} \PY{n}{order}
+          
+              \PY{k}{if} \PY{n}{info}\PY{p}{:}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{There are }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{len(img\PYZus{}list)\PYZcb{} images to be plotted. Adjust params}
+          \PY{n}{accordingly}\PY{o}{.}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{)}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Images: }\PY{l+s+si}{\PYZob{}img\PYZus{}list\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+              \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{n}{fig\PYZus{}w}\PY{p}{,} \PY{n}{fig\PYZus{}h}\PY{p}{)}\PY{p}{)}
+              \PY{n}{gs1} \PY{o}{=} \PY{n}{gridspec}\PY{o}{.}\PY{n}{GridSpec}\PY{p}{(}\PY{n}{nrows}\PY{p}{,} \PY{n}{ncols}\PY{p}{)}
+              \PY{n}{gs1}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{wspace}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.025}\PY{p}{)} \PY{c+c1}{\PYZsh{} set the spacing between axes.}
+          
+              \PY{c+c1}{\PYZsh{} view generator progression}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{img\PYZus{}list}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{n}{gs1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}aspect}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{equal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{n}{img} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}my\PYZus{}dir\PYZcb{}}\PY{l+s+s2}{/}\PY{l+s+si}{\PYZob{}img\PYZus{}list[i]\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+          
+              \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\newpage
+    \subsection*{References}\label{references}
+
+Brownlee, J. (2019, July 12). How to Develop a Conditional GAN (cGAN)
+From Scratch. Retrieved November 25, 2019, from
+https://machinelearningmastery.com/how-to-develop-a-conditional-generative-adversarial-network-from-scratch/.\\
+
+Cao, X., Dulloor, S. R., \& Prasetio, M. C. (2017). Face Generation with
+Conditional Generative Adversarial Networks. Retrieved December 18,
+2019, from
+https://pdfs.semanticscholar.org/b1ff/d13e8f68401a603eea9806bc37e396a3c77d.pdf?\_ga=2.8567484.88196337.1576674592-226014993.1574169937\\
+
+Desai, U. (2018, June 8). Training a Conditional DC-GAN on CIFAR-10.
+Retrieved November 25, 2019, from
+https://medium.com/@utk.is.here/training-a-conditional-dc-gan-on-cifar-10-fce88395d610.\\
+
+Kang, H. (2017, August 22). znxlwm/pytorch-MNIST-CelebA-cGAN-cDCGAN.
+Retrieved November 25, 2019, from
+https://github.com/znxlwm/pytorch-MNIST-CelebA-cGAN-cDCGAN.\\
+
+Karpathy, A., \& Johnson, J. (2017). CS231n: Convolutional Neural
+Networks for Visual Recognition-Transfer Learning. Retrieved November
+13, 2019, from https://cs231n.github.io/transfer-learning/\#tf.\\
+
+Mirza, M., \& Osindero, S. (2014). Conditional generative adversarial
+nets. arXiv preprint arXiv:1411.1784. Retrieved from
+https://arxiv.org/pdf/1411.1784.pdf\\
+
+Tan, W. R., Chan, C. S., Aguirre, H. E., \& Tanaka, K. (2018). Improved
+artgan for conditional synthesis of natural image and artwork. IEEE
+Transactions on Image Processing, 28(1), 394-409. Retrieved December 18,
+2019, from https://ieeexplore-ieee-org.ccl.idm.oclc.org/document/8444471\\
+
+Wang, Y., Dantcheva, A., \& Bremond, F. (2018, September). From
+attributes to faces: a conditional generative network for face
+generation. In 2018 International Conference of the Biometrics Special
+Interest Group (BIOSIG) (pp. 1-5). IEEE.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
